@@ -1,6 +1,6 @@
 const date = new Date();
 
-const dateObj = {
+const dateObject = {
 	fullYear: date.getFullYear(),
 	month: date.getMonth() + 1,
 	longMonthName: date.toLocaleString('default', { month: 'long' }),
@@ -13,7 +13,7 @@ const dateObj = {
 	fullDate2: date.toLocaleDateString(),
 };
 
-const time = {
+const timeObject = {
 	hours: date.getHours(),
 	minutes: date.getMinutes(),
 	seconds: date.getSeconds(),
