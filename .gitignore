@@ -1,5 +1,7 @@
 C:\Users\CalCo\Coding\Planner_Project\projectNotes
 projectNotes
-.settings
+.settings*
 
-*.md
+.md*
+projectNotes\initNotes.md
+projectNotes\initNotes.md
