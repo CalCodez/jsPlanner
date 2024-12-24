@@ -1,7 +1,8 @@
-C:\Users\CalCo\Coding\Planner_Project\projectNotes
-projectNotes
-.settings*=
 
+.vscode
 .md
-projectNotes\initNotes.md
-projectNotes\initNotes.md
+projectNotes\
+
+
+initNotes.md
+progressNotes.md
