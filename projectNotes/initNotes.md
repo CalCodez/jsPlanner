@@ -1,10 +1,41 @@
 <!-- ^^ DONE -->
 
-1. Theme
-2. Design
-3. Methods (js)
-4. Styles
-5. Concept
-6. Pages
-7. Responsive
-8. Animation
+1. PROJECT:Concept
+   -Crate and day planner that allows you to create diffrent events (to do, appoinments, reminders, notes) and disaply the genrated contianer in their parent container.
+
+2. TASK:Theme/Styles
+   -Dark/Light
+   -buttons, anchors
+   -border and Shadows
+   -list and menus
+   -navigations
+   -icons
+   -images
+
+3. TASK: Design
+   -Body build out
+   -Side BarMenu
+   -Generate From
+   -Clock
+   -Calendar
+   -Dashboard
+   -Notes
+
+4. TASK: Methods (js)
+   -Genarate Event Boxes- from genrate from
+   -Timestamp Function
+   -Genarete object
+
+5. TASK: Pages
+   -flexActive on click for each parent container
+
+6. TASK: Responsive
+   -clean wrap;
+   -elemt adjust
+   7.TASK: Animation
+   --sheesh
+
+TODO:LESSON:
+-local storage (store: generate event boxex, to do list items, appointment-calander events)
+-form input value .js
+-transition

@@ -1,4 +1,20 @@
 :root {
+	--black: #000;
+	--white: #fff;
+	--black-main: #3b3b3b;
+	--black-dark: #222222;
+	--black-light: #636363;
+	--red-main: #c30101;
+	--red-dark: #940000;
+
+	/* Tex color */
+	/* Label Color */
+	/* Border Color */
+	/* Contrast (dark and light) */
+	/* Buttons Colors */
+	/* Button Text */
+	/* Button Shadows */
+
 	--ol: 1px solid white;
 }
 
@@ -12,6 +28,25 @@ li,
 a {
 	list-style: none;
 	text-decoration: none;
+}
+
+html,
+body {
+	display: flex;
+	padding: 8px;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	max-width: 1400px;
+	justify-self: center;
+	flex-direction: column;
+	background-color: var(--black-dark);
+	box-shadow: 1px 1px 5px var(--black-light);
 }
 
 .container {
@@ -28,19 +63,65 @@ a {
 	align-items: center;
 }
 
-html,
-body {
-	display: flex;
-	padding: 8px;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
+.event-box {
+	width: 290px;
+	height: 320px;
+	border: 3px solid var(--black);
+	box-shadow: 1px 1px 5px 1px var(--red-main);
+	background: var(--black-main);
+	flex-direction: column;
+	padding: 10px;
+	border-radius: 8px;
+	justify-content: space-around;
 }
 
-body {
+.event-title-container {
+	width: 100%;
+	height: 35px;
+	color: var(--red-main);
+	font-size: 1.5rem;
+	text-shadow: 1px 1px 1px var(--black-dark);
+	border: 2px ridge var(--black);
+	border-radius: 5px;
+	box-shadow: 1px 3px 8px 1px var(--red-dark);
+	margin-bottom: 5px;
+}
+
+.event-description-container {
+	width: 100%;
+	height: 150px;
+	overflow: hidden;
+	border: 2px ridge var(--black-light);
+	border-radius: 5px;
+	box-shadow: 1px 3px 8px 1px var(--red-dark);
+}
+
+.event-description-container .event-description {
+	width: 10px;
+	text-align: justify;
+	word-wrap: pretty;
+	color: var(--red-dark);
 	width: 100%;
 	height: 100%;
-	max-width: 1300px;
-	justify-self: center;
-	flex-direction: column;
+	text-shadow: 1px 1px 1px var(--black-dark);
+	font-size: 1rem;
+	padding: 2px;
+}
+
+.event-button-container {
+	width: 100%;
+	height: 50px;
+	justify-content: space-around;
+	border: 2px ridge var(--black-light);
+	border-radius: 5px;
+	box-shadow: 1px 3px 8px 1px var(--red-dark);
+}
+
+.event-button-container .event-button {
+	width: 100px;
+	height: 30px;
+	border-radius: 8px;
+	background-color: var(--red-dark);
+	border: 2px solid var(--black);
+	cursor: pointer;
 }
