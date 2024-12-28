@@ -34,9 +34,9 @@ html,
 body {
 	display: flex;
 	padding: 8px;
-	justify-content: center;
 	align-items: center;
 	height: 100%;
+	justify-content: center;
 }
 
 body {
@@ -61,6 +61,23 @@ body {
 	box-sizing: content-box;
 	justify-content: center;
 	align-items: center;
+}
+
+.toggle-buttons {
+	width: 80px;
+	height: 30px;
+	border-radius: 8px;
+	background-color: var(--black);
+	font-size: 0.6rem;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	padding: 5px;
+	color: var(--red-dark);
+	font-weight: 800;
+	box-shadow: 2px 1px 5px 1px var(--red-dark);
+}
+
+.toggle-buttons:hover {
+	transform: scale(1.1);
 }
 
 .event-box {

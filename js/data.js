@@ -8,3 +8,16 @@ const toggleClass = (element, className) => element.classList.toggle(className);
 const select = (selector) => document.querySelector(selector);
 const selectAll = (selector) => document.querySelectorAll(selector);
 const textContent = (element, text) => (element.textContent = text);
+
+const click = 'click';
+const keyup = 'keyup';
+const sideMenuToggle = getById('side-menu-toggler');
+const sideMenuContainer = getById('side-menu-container');
+
+sideMenuToggle.addEventListener(click, () => {
+	if (!sideMenuContainer.classList.contains('active')) {
+		toggleClass(sideMenuContainer, 'active');
+	} else {
+		toggleClass(sideMenuContainer, 'active');
+	}
+});
