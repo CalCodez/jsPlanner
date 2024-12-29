@@ -43,6 +43,8 @@
 	transition: width ease 0.5s;
 	flex-wrap: nowrap;
 	justify-content: space-around;
+	z-index: 100;
+	/*** Needs fixed- loweer index */
 }
 
 .side-menu-container.active {
@@ -78,6 +80,7 @@
 	font-size: 1.5rem;
 	width: fit-content;
 	flex-wrap: nowrap;
+	cursor: pointer;
 }
 
 .main-display-container {
