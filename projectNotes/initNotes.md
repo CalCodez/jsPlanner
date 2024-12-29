@@ -36,6 +36,9 @@
    --sheesh
 
 TODO:LESSON:
--local storage (store: generate event boxex, to do list items, appointment-calander events)
+-capture input values
 -form input value .js
+
+-submit ?page not foucn error 404
+-local storage (store: generate event boxex, to do list items, appointment-calander events)
 -transition
