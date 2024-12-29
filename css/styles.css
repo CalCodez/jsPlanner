@@ -46,29 +46,26 @@
 }
 
 .side-menu-container.active {
-	width: 250px;
+	width: 140px;
 	height: 100%;
 	box-shadow: 1px 1px 5px var(--red-dark);
 	position: absolute;
 	background-color: var(--black);
 	left: 0;
 	flex-direction: column;
-	position: relative;
 	overflow: hidden;
 	text-align: left;
-	justify-content: space-between;
-	align-content: space-around;
-	justify-content: space-evenly;
 	transition: width ease 0.5s;
 	flex-wrap: nowrap;
+	justify-content: space-around;
 }
 
 .side-menu-spans {
 	height: 1.5rem;
 	width: 95%;
 	color: var(--red-dark);
-	align-items: flex-start;
-	font-size: 1.5rem;
+	align-items: center;
+	font-size: 1.2rem;
 	justify-content: flex-start;
 	column-gap: 10px;
 	padding-left: 10px;
@@ -83,15 +80,34 @@
 	flex-wrap: nowrap;
 }
 
-.side-menu-icons-container {
-	flex-direction: column;
-	height: 500px;
-	margin-top: 15px;
-}
-
 .main-display-container {
 	width: 100%;
 	outline: 1px solid red;
 	height: 100%;
 	flex-wrap: wrap;
+	position: relative;
+}
+
+.main-display-container .fa-plus {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	color: var(--red-dark);
+	font-size: 2rem;
+	width: 50px;
+	height: 50px;
+	background: var(--black);
+	padding: 5px;
+	border-radius: 50%;
+	z-index: 5;
+	border: 1px solid var(--red-dark);
+	box-shadow: 2px 2px 5px var(--black);
+	cursor: pointer;
+}
+
+.flex-active {
+	display: flex;
+}
+.flex-inactive {
+	display: none;
 }

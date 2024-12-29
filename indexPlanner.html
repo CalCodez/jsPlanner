@@ -39,20 +39,40 @@
         <span class="content side-menu-spans"><i class="fa-solid fa-bell content"></i>Reminders</span>
         <span class="content side-menu-spans"><i class="fa-solid fa-note-sticky content"></i>Notes</span>
 
-
-
-
-
-
-        < </div>
-          <div class="main-display-container"></div>
-
       </div>
 
+      <div class="main-display-container">
 
 
-      <script src="/js/data.js"></script>
-      <script src="/js/main.js"></script>
+
+        <i class="fa-solid fa-plus content"></i>
+      </div>
+    </div>
+
+    <div class="content-form-container container">
+
+      <form id="event-form" action="create" class="event-form container">
+        <h2>Create An Events</h2>
+        <select class="form-input" name="event-type" id="event-type">
+          <option id="">Select Event Type</option>
+          <option id="calendar-select">Calendar</option>
+          <option id="to-do-select">To Do</option>
+          <option id="reminder-select">Reminder</option>
+          <option id="note-select">Note</option>
+        </select>
+
+        <input type="text" class="form-input" name="event-title" id="event-title" placeholder="Event Title">
+
+        <textarea name="event-description" id="event-description" placeholder="Enter Description"></textarea>
+
+        <button class="toggle-buttons" id="generate-btn">Generate</button>
+
+      </form>
+
+    </div>
+
+    <script src="/js/data.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 
 </html>

@@ -47,6 +47,7 @@ body {
 	flex-direction: column;
 	background-color: var(--black-dark);
 	box-shadow: 1px 1px 5px var(--black-light);
+	position: relative;
 }
 
 .container {
@@ -78,6 +79,66 @@ body {
 
 .toggle-buttons:hover {
 	transform: scale(1.1);
+}
+
+.content-form-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	outline: 1px solid red;
+	background-color: var(--black);
+	opacity: 0.5;
+	z-index: 99;
+	display: none;
+}
+
+.event-form {
+	width: 320px;
+	height: 500px;
+	border: 2px ridge var(--red-dark);
+	position: absolute;
+	z-index: 98;
+	background-color: var(--black);
+	flex-direction: column;
+	justify-content: flex-start;
+	row-gap: 50px;
+}
+
+.event-form input,
+.event-form textarea {
+	width: 300px;
+	height: 30px;
+	border: 2px groove var(--red-dark);
+	background: var(--black-main);
+	color: var(--red-dark);
+	border-radius: 8px;
+	padding: 5px;
+}
+
+.event-form textarea {
+	height: 50px;
+	width: 300px;
+	resize: none;
+}
+.event-form input::placeholder,
+.event-form textarea::placeholder {
+	color: var(--red-dark);
+	font-size: 1rem;
+	text-shadow: 1px 1px 1px var(--black);
+}
+
+.event-form h2 {
+	color: var(--red-dark);
+	width: 100%;
+	text-align: center;
+}
+
+#event-type {
+	width: 200px;
+	outline: var(--ol);
+	color: red;
+	background: var(--black-main);
+	border: 2px groove var(--red-dark);
 }
 
 .event-box {
