@@ -95,52 +95,68 @@ body {
 .event-form {
 	width: 320px;
 	height: 500px;
-	border: 2px ridge var(--red-dark);
+	border: 5px groove var(--black-dark);
 	position: absolute;
 	z-index: 98;
-	background-color: var(--black);
+	background-color: var(--black-main);
 	flex-direction: column;
 	justify-content: flex-start;
 	row-gap: 50px;
+	padding: 10px;
+	box-shadow: 2px 2px 15px 2px var(--red-dark);
 }
 
+.event-form h2 {
+	color: var(--black);
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 2rem;
+	text-shadow: 2px 1px 2px var(--white);
+}
+
+.event-form select {
+	color: var(--red-dark);
+}
+.event-form select,
 .event-form input,
 .event-form textarea {
-	width: 300px;
+	width: 280px;
 	height: 30px;
-	border: 2px groove var(--red-dark);
-	background: var(--black-main);
-	color: var(--red-dark);
+	border: 2px groove var(--white);
+	background: var(--black);
+	color: var(--white);
 	border-radius: 8px;
 	padding: 5px;
 }
 
 .event-form textarea {
-	height: 50px;
-	width: 300px;
 	resize: none;
 }
+
+.event-form select option,
 .event-form input::placeholder,
 .event-form textarea::placeholder {
-	color: var(--red-dark);
+	color: var(--white);
 	font-size: 1rem;
 	text-shadow: 1px 1px 1px var(--black);
 }
 
-.event-form h2 {
-	color: var(--red-dark);
+.event-form-button-container {
 	width: 100%;
-	text-align: center;
+	height: 80px;
+	justify-content: space-around;
 }
 
-#event-type {
-	width: 200px;
-	outline: var(--ol);
-	color: red;
-	background: var(--black-main);
-	border: 2px groove var(--red-dark);
+.event-form-button-container button {
+	width: 100px;
+	height: 35px;
+	font-size: 1rem;
+	color: var(--white);
+	box-shadow: 2px 1px 5px 1px var(--black);
 }
 
+/* Classes to apply to the js created container */
 .event-box {
 	width: 290px;
 	height: 320px;

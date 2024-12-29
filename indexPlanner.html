@@ -43,18 +43,17 @@
 
       <div class="main-display-container">
 
-
-
         <i class="fa-solid fa-plus content"></i>
       </div>
     </div>
 
-    <div class="content-form-container container">
 
-      <form id="event-form" action="create" class="event-form container">
-        <h2>Create An Events</h2>
+    <!-- ??Create Event Form -->
+    <div class="content-form-container container">
+      <div id="event-form" class="event-form container">
+        <h2>Create Event</h2>
         <select class="form-input" name="event-type" id="event-type">
-          <option id="">Select Event Type</option>
+          <option id="first-select">Select Event Type</option>
           <option id="calendar-select">Calendar</option>
           <option id="to-do-select">To Do</option>
           <option id="reminder-select">Reminder</option>
@@ -65,9 +64,13 @@
 
         <textarea name="event-description" id="event-description" placeholder="Enter Description"></textarea>
 
-        <button class="toggle-buttons" id="generate-btn">Generate</button>
+        <div class="event-form-button-container container">
+          <button class="toggle-buttons" id="generate-btn">Generate</button>
+          <button class="toggle-buttons" id="cancel-btn">Cancel</button>
 
-      </form>
+        </div>
+
+      </div>
 
     </div>
 

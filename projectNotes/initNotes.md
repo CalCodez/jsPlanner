@@ -36,9 +36,11 @@
    --sheesh
 
 TODO:LESSON:
--capture input values
--form input value .js
 
--submit ?page not foucn error 404
+<!--capture input values--> used input with out wrapping them in a from element
+<!---form input value .js-->
+
+<!---submit ?page not foucn error 404-->
+
 -local storage (store: generate event boxex, to do list items, appointment-calander events)
 -transition
