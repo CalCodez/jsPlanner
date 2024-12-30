@@ -1,6 +1,6 @@
 .header-container {
 	width: 100%;
-	height: 80px;
+	height: 10%;
 	border: 2px outset var(--red-dark);
 	font-family: 'Stereotones', sans-serif;
 	justify-content: space-between;
@@ -27,8 +27,10 @@
 
 .main-body-container {
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	position: relative;
+	background-color: var(--black);
+	padding: 8px;
 }
 
 .side-menu-container {
@@ -44,23 +46,11 @@
 	transition: width ease 0.5s;
 	flex-wrap: nowrap;
 	justify-content: space-around;
-	z-index: 100;
-	/*** Needs fixed- loweer index */
+	z-index: 1;
 }
 
 .side-menu-container.active {
-	width: 140px;
-	height: 100%;
-	box-shadow: 1px 1px 5px var(--red-dark);
-	position: absolute;
-	background-color: var(--black);
-	left: 0;
-	flex-direction: column;
-	overflow: hidden;
-	text-align: left;
-	transition: width ease 0.5s;
-	flex-wrap: nowrap;
-	justify-content: space-around;
+	width: 180px;
 }
 
 .side-menu-spans {
@@ -73,6 +63,11 @@
 	column-gap: 10px;
 	padding-left: 10px;
 	text-wrap: nowrap;
+	cursor: pointer;
+}
+
+.side-menu-spans:hover {
+	transform: scale(1.1);
 }
 
 .fa-solid,
@@ -90,6 +85,7 @@
 	height: 100%;
 	flex-wrap: wrap;
 	position: relative;
+	background-color: var(--black);
 }
 
 .main-display-container .fa-plus {
@@ -103,10 +99,39 @@
 	background: var(--black);
 	padding: 5px;
 	border-radius: 50%;
-	z-index: 5;
+	z-index: 1;
 	border: 1px solid var(--red-dark);
 	box-shadow: 2px 2px 5px var(--black);
 	cursor: pointer;
+}
+
+.to-do-container {
+	width: 100%;
+	height: 100%;
+	background-color: var(--black-dark);
+	border: 3px solid red;
+	flex-direction: column;
+}
+
+.title-bar {
+	width: 90%;
+	height: 10%;
+	margin-bottom: 15px;
+}
+
+.title-bar h2 {
+	font-size: 3rem;
+	text-shadow: 2px 2px 2px var(--red-dark);
+}
+
+.parent-container {
+	height: 90%;
+	width: 90%;
+	flex-wrap: wrap;
+	gap: 20px;
+	overflow: scroll;
+	padding: 20px 15px;
+	justify-content: space-evenly;
 }
 
 .flex-active {
