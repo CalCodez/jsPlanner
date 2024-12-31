@@ -19,8 +19,12 @@ function generateTimeStampString() {
 	const timestamp = Date.now();
 	const date = new Date(timestamp);
 	const formattedString = date.toLocaleString();
-	return `created at: ${formattedString}`;
+	return formattedString;
 }
+
+const dateDisplay = getById('date-container');
+
+dateDisplay.innerText = generateTimeStampString();
 
 //``Toggle SideBar Menu var and Function
 const sideMenuToggle = getById('side-menu-toggler');
@@ -83,6 +87,8 @@ const eventBoxClasses = {
 
 const generateEventButton = getById('generate-btn');
 const toDoParentContainer = getById('to-do-parent-container');
+const eventCount = Array.from(toDoParentContainer);
+const eventCountContainer = getById('event-count-container');
 
 generateEventButton.addEventListener(click, function () {
 	const eventBoxes = [];
@@ -111,7 +117,7 @@ generateEventButton.addEventListener(click, function () {
 	const inputValues = (array, object) => {
 		textContent(array[0], object.eventTitle.value);
 		textContent(array[1], object.eventDescription.value);
-		textContent(array[3], generateTimeStampString());
+		textContent(array[3], `created at: ${generateTimeStampString()}`);
 	};
 
 	inputValues(rest, eventFormIds);
@@ -134,10 +140,15 @@ generateEventButton.addEventListener(click, function () {
 		appendChild(rest[2], eventBtns);
 	}
 
-	toggleClass(eventFormContainer, flexActive);
+	eventCount.push(eventBox);
+	eventCountContainer.innerText = `ToDo Items: ${eventCount.length}`;
 
-	alert(`Create Event Successful!`);
+	console.log(eventCount.length);
+
+	toggleClass(eventFormContainer, flexActive);
 });
+
+//console.log(eventCount.length);
 
 //??Close Containers on click and Escape key Default
 
