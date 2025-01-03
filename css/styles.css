@@ -52,7 +52,7 @@
 
 .main-body-container {
 	width: 100%;
-	height: 90%;
+	height: 80%;
 	position: relative;
 	background-color: var(--black);
 	padding: 8px;
@@ -112,6 +112,7 @@
 	flex-wrap: wrap;
 	position: relative;
 	background-color: var(--black);
+	justify-content: space-evenly;
 }
 
 .main-display-container .fa-plus {
@@ -131,59 +132,47 @@
 	cursor: pointer;
 }
 
-.to-do-container {
-	width: 100%;
-	height: 100%;
-	background-color: var(--black-dark);
-	border: 3px solid red;
+.main-display-container .event-holder-container {
+	width: 320px;
+	height: 95%;
+	position: relative;
+	border: 3px groove var(--red-dark);
 	flex-direction: column;
+	/*overflow: hidden;*/
 }
-
-.parent-status-bar {
+.event-holder-container .event-holder-title-container {
 	width: 100%;
-	height: 10%;
-	margin-bottom: 15px;
-	justify-content: space-evenly;
-	background-color: var(--black);
-	margin-top: 5px;
+	height: 40px;
+	top: 0;
+	color: var(--red-dark);
+	font-size: 1.5rem;
+	font-family: 'Stereotones', sans-serif;
+	border-bottom: 3px inset var(--red-dark);
+	position: absolute;
 }
 
-.event-count-container,
-.date-container {
-	height: 50%;
-	width: 220px;
-	color: var(--black-light);
-	font-size: 1.2rem;
-	border: 2px outset var(--black-main);
-	border-radius: 15px;
-	box-shadow: 1px 1px 4px 1px var(--black-light);
-}
-.date-container {
-	font-size: 1.2rem;
-}
-
-.parent-status-bar h2 {
-	font-size: 1.6rem;
-	text-shadow: 1px 1px 1px var(--black-light);
-	width: 220px;
-	height: 50%;
-	justify-content: center;
-	text-align: center;
-	place-content: center;
-	border-radius: 15px;
-	box-shadow: 1px 1px 4px 1px var(--black-light);
-	color: var(--black-main);
-}
-
-.parent-container {
-	height: 90%;
-	width: 90%;
+.event-holder-container .event-parent-container {
+	width: 100%;
+	height: 600px;
+	overflow-y: scroll;
 	flex-wrap: wrap;
-	gap: 20px;
-	overflow: scroll;
-	padding: 20px 15px;
-	justify-content: space-evenly;
+	padding: 15px;
+	top: 10px;
+	margin-top: 40px;
+	gap: 25px;
 }
+
+/*#to-event-holder {
+	width: 100%;
+}
+
+#appointment-event-holder {
+	display: none;
+}
+
+#other-event-holder {
+	display: none;
+}*/
 
 .flex-active {
 	display: flex;

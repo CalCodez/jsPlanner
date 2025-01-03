@@ -23,8 +23,8 @@
         </div>
         <div class="container main-toggle-container">
           <button class="toggle-buttons">To Do</button>
-          <button class="toggle-buttons">Reminders</button>
-          <button class="toggle-buttons">Calendar</button>
+          <button class="toggle-buttons">Appointments</button>
+          <button class="toggle-buttons">Other</button>
           <button class="toggle-buttons">Notes</button>
         </div>
       </div>
@@ -53,21 +53,58 @@
         <span class=" content side-menu-spans"><i id="side-menu-toggler" class="fa-solid fa-bars"></i>Close Menu</span>
         <span class="content side-menu-spans create-event-togglers"><i class="fa-solid fa-plus "> </i>Create</span>
         <span class="content side-menu-spans"><i class="fa-solid fa-list-check content"></i>To DO</span>
-        <span class="content side-menu-spans"><i class="fa-solid fa-bell content"></i>Reminders</span>
-        <span class="content side-menu-spans"><i class="fa-regular fa-calendar-days content"> </i>Calendar</span>
+        <span class="content side-menu-spans"><i class="fa-regular fa-calendar-days content"> </i>Appointments</span>
+        <span class="content side-menu-spans"><i class="fa-solid fa-bell content"></i>other</span>
         <span class="content side-menu-spans"><i class="fa-solid fa-note-sticky content"></i>Notes</span>
 
       </div>
 
-      <div class="main-display-container">
-        <div id="to-do-main-container" class="container to-do-container">
+      <div class="main-display-container container">
+        <div id="to-event-holder" class="container event-holder-container">
+          <div class="container event-holder-title-container">
+            TO DO
+          </div>
+          <div id="to-parent-container" class="container event-parent-container">
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
+            <div class="event-box"></div>
 
-          <div id="to-do-parent-container" class="container parent-container">
+
+
 
           </div>
         </div>
-
-
+        <div id="appointment-event-holder" class="container event-holder-container">
+          <div class="container event-holder-title-container">
+            Appointmnets
+          </div>
+          <div id="appointment-parent-container" class="container event-parent-container"></div>
+        </div>
+        <div id="other-event-holder" class="container event-holder-container">
+          <div class="container event-holder-title-container">
+            Other
+          </div>
+          <div id="other-parent-container" class="container event-parent-container"></div>
+        </div>
 
         <i class="fa-solid fa-plus content create-event-togglers"></i>
       </div>
