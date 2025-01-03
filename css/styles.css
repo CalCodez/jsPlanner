@@ -1,12 +1,36 @@
 .header-container {
 	width: 100%;
-	height: 10%;
+	height: 20%;
 	border: 2px outset var(--red-dark);
-	font-family: 'Stereotones', sans-serif;
-	justify-content: space-between;
+	justify-content: center;
 	padding: 0 10px;
-	margin-bottom: 5px;
 	background-color: var(--black);
+	flex-direction: column;
+}
+
+.logo-container {
+	font-family: 'Stereotones', sans-serif;
+}
+
+.logo-nav-wrapper {
+	width: 100%;
+	height: 60%;
+	justify-content: space-between;
+}
+.status-bar {
+	width: 100%;
+	height: 30%;
+	justify-content: space-evenly;
+	background-color: var(--status-bar);
+}
+
+.status-bar .container {
+	width: 150px;
+	height: 100%;
+	font-size: 1rem;
+	color: var(--red-dark);
+	justify-content: flex-start;
+	padding-left: 5px;
 }
 
 .logo-container,
@@ -16,7 +40,7 @@
 }
 
 .logo-container {
-	color: var(--black);
+	color: var(--red-dark);
 	font-size: 2rem;
 	letter-spacing: 3px;
 	text-shadow: 1px 1px 3px var(--red-dark);

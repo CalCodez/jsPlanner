@@ -17,17 +17,35 @@
 
   <body>
     <div class="header-container container">
-      <div class="container logo-container">
-        Dashboard
+      <div class="container logo-nav-wrapper">
+        <div class="container logo-container">
+          Dashboard
+        </div>
+        <div class="container main-toggle-container">
+          <button class="toggle-buttons">To Do</button>
+          <button class="toggle-buttons">Reminders</button>
+          <button class="toggle-buttons">Calendar</button>
+          <button class="toggle-buttons">Notes</button>
+        </div>
       </div>
-      <div class="container main-toggle-container">
-        <button class="toggle-buttons">To Do</button>
-        <button class="toggle-buttons">Reminders</button>
-        <button class="toggle-buttons">Calendar</button>
-        <button class="toggle-buttons">Notes</button>
+
+      <div class="container status-bar">
+        <div id="total-event-count" class="container">
+          Total:
+        </div>
+        <div id="to-do-count" class="container">
+          ToDo:
+        </div>
+        <div id="appointmnet-count" class="container">
+          Appointments:
+        </div>
+        <div id="other-count" class="container">
+          Other:
+        </div>
+        <div id="date-container" class="container"></div>
+
       </div>
     </div>
-
 
     <div class="main-body-container container">
       <div id="side-menu-container" class="side-menu-container container ">
@@ -43,13 +61,7 @@
 
       <div class="main-display-container">
         <div id="to-do-main-container" class="container to-do-container">
-          <div class="container parent-status-bar">
-            <h2>To Do</h2>
-            <div id="event-count-container" class="container event-count-container">
-              ToDo Items: 0
-            </div>
-            <div id="date-container" class="container date-container"></div>
-          </div>
+
           <div id="to-do-parent-container" class="container parent-container">
 
           </div>
