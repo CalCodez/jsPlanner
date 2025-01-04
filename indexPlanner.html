@@ -65,29 +65,31 @@
             TO DO
           </div>
           <div id="to-parent-container" class="container event-parent-container">
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-            <div class="event-box"></div>
-
+            <div class=" container event-box">
+              <div class="event-type-container">
+                To Do
+              </div>
+              <div class="event-title-container">
+                Make Appointment
+              </div>
+              <div class="event-date-container">
+                Date: 01/31/2025
+              </div>
+              <div class="event-description-container" id="event-descritpion-cotnainer">
+                This is placeholder text using to style for the generated look from the create and event form. Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Quasi saepe nisi dolorum, optio veniam architecto
+                quae non. Quas consequatur cumque officiis, magnam repellendus fuga magni illo nihil, ex tempore
+                voluptate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et atque suscipit omnis
+                maxime sint minima perferendis veniam dicta. Optio in fugiat voluptate quasi beatae reprehenderit autem
+                similique tenetur ea?
+              </div>
+              <div class="event-button-container">
+                <button class="toggle-buttons">Complete</button><button class="toggle-buttons">Complete</button>
+              </div>
+              <div class="event-timestamp-container">
+                Generated At 13:35 12/22/22
+              </div>
+            </div>
 
 
 
@@ -105,7 +107,15 @@
           </div>
           <div id="other-parent-container" class="container event-parent-container"></div>
         </div>
+        <div id="note-event-holder" class="container event-holder-container">
+          <div class="container event-holder-title-container">
+            Notes
+          </div>
+          <div id="note-parent-container" class="container event-parent-container">
+            <div class="event-box"></div>
 
+          </div>
+        </div>
         <i class="fa-solid fa-plus content create-event-togglers"></i>
       </div>
     </div>
@@ -124,7 +134,8 @@
         </select>
 
         <input type="text" class="form-input" name="event-title" id="event-title" placeholder="Event Title">
-
+        <input type="date" class="form-input" name="event-title" id="event-date" placeholder="Event Title">
+        <label for="event-title">Event Title</label>
         <textarea name="event-description" id="event-description" placeholder="Enter Description"></textarea>
 
         <div class="event-form-button-container container">
