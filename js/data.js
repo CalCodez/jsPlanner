@@ -68,87 +68,55 @@ for (let toggles of eventFormTogglers) {
 	});
 }
 
-//``Generate To Do Events vars and function
-const eventFormIds = {
-	eventType: getById('event-type'),
-	eventTitle: getById('event-title'),
-	eventDescription: getById('event-description'),
+//``Toggle Event And Note Form Var and Function
+const formOptionsContainer = getById('form-options-container');
+const toggleEventButton = getById('toggle-create-event');
+const toggleNoteButton = getById('toggle-create-note');
+const eventForm = getById('event-form');
+const noteForm = getById('note-form');
+const eventBackButton = getById('back-event-btn');
+const noteBackButton = getById('back-note-btn');
+
+console.log(eventBackButton);
+
+const toggleForms = (
+	toggler,
+	targetForm,
+	checkForm,
+	optionsContainer,
+	toggler2
+) => {
+	toggler.addEventListener(click, function () {
+		if (
+			!targetForm.classList.contains(flexActive) &&
+			!checkForm.classList.contains(flexActive)
+		) {
+			toggleClass(targetForm, flexActive);
+			toggleClass(optionsContainer, flexInactive);
+		}
+		toggler2.addEventListener(click, function () {
+			while (targetForm.classList.contains(flexActive)) {
+				toggleClass(targetForm, flexActive);
+				toggleClass(optionsContainer, flexInactive);
+			}
+		});
+	});
 };
+toggleForms(
+	toggleEventButton,
+	eventForm,
+	noteForm,
+	formOptionsContainer,
+	eventBackButton
+);
 
-const eventBoxClasses = {
-	eventBox: 'event-box',
-	eventTitleContainer: 'event-title-container',
-	eventDescriptionContainer: 'event-description-container',
-	eventButtonContainer: 'event-button-container',
-	completeButton: 'complete-buttons',
-	deleteButtons: 'delete-buttons',
-	timeStampContainer: 'time-stamp-container',
-};
-
-const generateEventButton = getById('generate-btn');
-const toDoParentContainer = getById('to-do-parent-container');
-const eventCount = Array.from(toDoParentContainer);
-const eventCountContainer = getById('event-count-container');
-
-generateEventButton.addEventListener(click, function () {
-	const eventBoxes = [];
-	for (let i = 0; i < 5; i++) {
-		eventBoxes.push(createElement('div'));
-	}
-	const assignClasses = (array, object) => {
-		addClass(array[0], object.eventBox);
-		addClass(array[1], object.eventTitleContainer);
-		addClass(array[2], object.eventDescriptionContainer);
-		addClass(array[3], object.eventButtonContainer);
-		addClass(array[4], object.timeStampContainer);
-	};
-
-	//added container class to all the event box divs
-	for (let i of eventBoxes) {
-		addClass(i, 'container');
-	}
-	assignClasses(eventBoxes, eventBoxClasses);
-	const [eventBox, ...rest] = eventBoxes;
-	appendChild(toDoParentContainer, eventBox);
-	for (let innerDivs of rest) {
-		appendChild(eventBox, innerDivs);
-	}
-
-	const inputValues = (array, object) => {
-		textContent(array[0], object.eventTitle.value);
-		textContent(array[1], object.eventDescription.value);
-		textContent(array[3], `created at: ${generateTimeStampString()}`);
-	};
-
-	inputValues(rest, eventFormIds);
-
-	let eventButtons = [];
-
-	for (let buttons = 0; buttons < 2; buttons++) {
-		eventButtons.push(createElement('button'));
-	}
-	const buttonAssignment = (array, object) => {
-		addClass(array[0], object.completeButton);
-		addClass(array[1], object.deleteButtons);
-	};
-
-	buttonAssignment(eventButtons, eventBoxClasses);
-	textContent(eventButtons[0], 'Complete');
-	textContent(eventButtons[1], 'Delete');
-
-	for (let eventBtns of eventButtons) {
-		appendChild(rest[2], eventBtns);
-	}
-
-	eventCount.push(eventBox);
-	eventCountContainer.innerText = `ToDo Items: ${eventCount.length}`;
-
-	console.log(eventCount.length);
-
-	toggleClass(eventFormContainer, flexActive);
-});
-
-//console.log(eventCount.length);
+toggleForms(
+	toggleNoteButton,
+	noteForm,
+	eventForm,
+	formOptionsContainer,
+	noteBackButton
+);
 
 //??Close Containers on click and Escape key Default
 
