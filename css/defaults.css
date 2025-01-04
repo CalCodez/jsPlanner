@@ -95,28 +95,61 @@ body {
 	display: none;
 }
 
-.event-form {
+.form-options-container {
+	height: 550px;
+	width: 200px;
+	flex-direction: column;
+	z-index: 5;
+	justify-content: flex-start;
+	padding-top: 50px;
+	row-gap: 50px;
+}
+
+.form-option-title-container {
+	color: var(--red-dark);
+	width: 100%;
+	text-align: center;
+}
+
+.form-options-container .toggle-buttons {
+	width: 150px;
+	height: 40px;
+	font-size: 1rem;
+}
+
+.form-holder-container {
+	width: 400px;
+	height: 550px;
+}
+
+.event-form,
+.note-form {
 	width: 320px;
-	height: 500px;
-	border: 5px groove var(--black-dark);
-	position: absolute;
+	height: 550px;
+	border: 5px groove var(--red-dark);
 	z-index: 3;
 	background-color: var(--black);
 	flex-direction: column;
-	justify-content: flex-start;
-	row-gap: 50px;
+	justify-content: center;
 	padding: 10px;
 	box-shadow: 2px 2px 15px 2px var(--red-dark);
 	opacity: 1;
+	row-gap: 20px;
+	border-radius: 20px;
 }
 
-.event-form h2 {
-	color: var(--black);
+.event-form {
+	display: none;
+}
+
+.event-form h2,
+.note-form h2 {
+	color: var(--black-dark);
 	width: 100%;
 	text-align: center;
 	margin-top: 10px;
 	font-size: 2rem;
-	text-shadow: 2px 1px 2px var(--white);
+	text-shadow: 2px 1px 2px var(--red-dark);
 }
 
 .event-form select {
@@ -124,28 +157,39 @@ body {
 }
 .event-form select,
 .event-form input,
-.event-form textarea {
+.event-form textarea,
+.note-form textarea {
 	width: 280px;
 	height: 30px;
-	border: 2px groove var(--white);
+	border: 2px groove var(--black-light);
 	background: var(--black);
-	color: var(--white);
+	color: var(--red-dark);
 	border-radius: 8px;
 	padding: 5px;
 }
 
-.event-form textarea {
+.note-form textarea {
+	height: 300px;
 	resize: none;
+	font-size: 1.5rem;
+	border: 2px groove var(--red-dark);
+}
+
+.event-form .event-form-description-input {
+	height: 100px;
+	resize: none;
+	overflow-y: scroll;
 }
 label {
-	color: var(--red-dark);
-	outline: var(--ol);
+	color: var(--red-main);
 	width: 100%;
+	margin-top: -15px;
 }
 .event-form select option,
 .event-form input::placeholder,
-.event-form textarea::placeholder {
-	color: var(--white);
+.event-form textarea::placeholder,
+.note-form textarea::placeholder {
+	color: var(--red-dark);
 	font-size: 1rem;
 	text-shadow: 1px 1px 1px var(--black);
 }
@@ -160,8 +204,9 @@ label {
 	width: 100px;
 	height: 35px;
 	font-size: 1rem;
-	color: var(--white);
+	color: var(--red-dark);
 	box-shadow: 2px 1px 5px 1px var(--black);
+	box-shadow: 2px 2px 5px 2px var(--red-dark);
 }
 
 /* Classes to apply to the js created container */
@@ -177,7 +222,8 @@ label {
 	padding: 10px;
 	justify-content: space-between;
 }
-.event-type-container {
+.event-type-container,
+.note-type-container {
 	width: 50%;
 	height: 25px;
 	color: var(--red-dark);
@@ -189,7 +235,8 @@ label {
 }
 
 .event-title-container,
-.event-date-container {
+.event-date-container,
+.note-title-container {
 	width: 80%;
 	height: 35px;
 	color: var(--red-main);
@@ -243,4 +290,23 @@ label {
 	color: var(--white);
 	font-size: 0.8rem;
 	text-align: center;
+}
+
+.note-box {
+	width: 300px;
+	height: 250px;
+	border: 3px solid var(--black);
+	box-shadow: 1px 1px 10px 1px var(--red-main);
+	background: var(--black);
+	flex-direction: column;
+	border-radius: 8px;
+	place-content: center;
+	padding: 10px;
+	justify-content: space-between;
+}
+
+.note-description-container {
+	width: 100%;
+	height: 200px;
+	border: 2px solid var(--red-dark);
 }
