@@ -70,53 +70,48 @@ for (let toggles of eventFormTogglers) {
 
 //``Toggle Event And Note Form Var and Function
 const formOptionsContainer = getById('form-options-container');
-const toggleEventButton = getById('toggle-create-event');
-const toggleNoteButton = getById('toggle-create-note');
-const eventForm = getById('event-form');
-const noteForm = getById('note-form');
-const eventBackButton = getById('back-event-btn');
-const noteBackButton = getById('back-note-btn');
+const formsArray = {
+	eventForm: {
+		toggler: getById('toggle-create-event'),
+		form: getById('event-form'),
+		backButton: getById('back-event-btn'),
+	},
+	noteForm: {
+		toggler: getById('toggle-create-note'),
+		form: getById('note-form'),
+		backButton: getById('back-note-btn'),
+	},
+};
 
-console.log(eventBackButton);
+const { eventForm, noteForm } = formsArray;
 
 const toggleForms = (
-	toggler,
-	targetForm,
-	checkForm,
-	optionsContainer,
-	toggler2
+	object1,
+	object2,
+	optionsContainer = formOptionsContainer
 ) => {
-	toggler.addEventListener(click, function () {
+	object1.toggler.addEventListener(click, function () {
 		if (
-			!targetForm.classList.contains(flexActive) &&
-			!checkForm.classList.contains(flexActive)
+			!object1.form.classList.contains(flexActive) &&
+			!object2.form.classList.contains(flexActive)
 		) {
-			toggleClass(targetForm, flexActive);
+			toggleClass(object1.form, flexActive);
 			toggleClass(optionsContainer, flexInactive);
 		}
-		toggler2.addEventListener(click, function () {
-			while (targetForm.classList.contains(flexActive)) {
-				toggleClass(targetForm, flexActive);
+
+		object1.backButton.addEventListener(click, function () {
+			while (object1.form.classList.contains(flexActive)) {
+				toggleClass(object1.form, flexActive);
 				toggleClass(optionsContainer, flexInactive);
 			}
 		});
 	});
 };
-toggleForms(
-	toggleEventButton,
-	eventForm,
-	noteForm,
-	formOptionsContainer,
-	eventBackButton
-);
+toggleForms(eventForm, noteForm);
+toggleForms(noteForm, eventForm);
 
-toggleForms(
-	toggleNoteButton,
-	noteForm,
-	eventForm,
-	formOptionsContainer,
-	noteBackButton
-);
+const boxClasses = {};
+const fromIds = {};
 
 //??Close Containers on click and Escape key Default
 
