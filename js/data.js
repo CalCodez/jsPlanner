@@ -167,11 +167,15 @@ const parentEventCounter = {
 	},
 };
 
+const totalEventCounter = getById('total-event-count');
 const toDoEventCounter = Array.from(parentEventCounter.toDo.container);
 const appointmentEventCounter = Array.from(
 	parentEventCounter.appointment.container
 );
 const otherEventCounter = Array.from(parentEventCounter.other.container);
+const totalEventCount = (a, b, c) => {
+	return a.length + b.length + c.length;
+};
 
 const generateEvent = {
 	eventBox: 'event-box',
@@ -263,6 +267,15 @@ eventGeneratorButton.addEventListener(click, function () {
 			`Other: ${otherEventCounter.length}`
 		);
 	}
+
+	textContent(
+		totalEventCounter,
+		`Total: ${totalEventCount(
+			toDoEventCounter,
+			appointmentEventCounter,
+			otherEventCounter
+		)}`
+	);
 
 	toggleClass(eventFormContainer, flexActive);
 	toggleClass(eventForm.form, flexActive);
