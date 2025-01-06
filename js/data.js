@@ -2,6 +2,7 @@ const getByClass = (className) => document.getElementsByClassName(className);
 const getById = (id) => document.getElementById(id);
 const createElement = (element) => document.createElement(element);
 const appendChild = (parent, child) => parent.appendChild(child);
+const removeChild = (parent, child) => parent.removeChild(child);
 const addClass = (element, className = '') => element.classList.add(className);
 const removeClass = (element, className) => element.classList.remove(className);
 const toggleClass = (element, className) => element.classList.toggle(className);
@@ -262,6 +263,23 @@ eventGeneratorButton.addEventListener(click, function () {
 			parentEventCounter.toDo.counter,
 			`ToDo: ${toDoEventCounter.length}`
 		);
+		deleteButton.addEventListener(click, function () {
+			deleteButton.parentElement.parentElement.remove();
+			toDoEventCounter.pop(event);
+			textContent(
+				parentEventCounter.toDo.counter,
+				`ToDo: ${toDoEventCounter.length}`
+			);
+			textContent(
+				totalEventCounter,
+				`Total: ${totalEventCount(
+					toDoEventCounter,
+					appointmentEventCounter,
+					otherEventCounter,
+					noteEventCounter
+				)}`
+			);
+		});
 	} else if (generateEvent.type.formInput.value == 'Appointment') {
 		appendChild(parentEventCounter.appointment.container, event);
 		appointmentEventCounter.push(event);
@@ -269,6 +287,24 @@ eventGeneratorButton.addEventListener(click, function () {
 			parentEventCounter.appointment.counter,
 			`Appointments: ${appointmentEventCounter.length}`
 		);
+
+		deleteButton.addEventListener(click, function () {
+			deleteButton.parentElement.parentElement.remove();
+			appointmentEventCounter.pop(event);
+			textContent(
+				parentEventCounter.appointment.counter,
+				`Appointments: ${appointmentEventCounter.length}`
+			);
+			textContent(
+				totalEventCounter,
+				`Total: ${totalEventCount(
+					toDoEventCounter,
+					appointmentEventCounter,
+					otherEventCounter,
+					noteEventCounter
+				)}`
+			);
+		});
 	} else if (generateEvent.type.formInput.value == 'Other') {
 		appendChild(parentEventCounter.other.container, event);
 		otherEventCounter.push(event);
@@ -276,6 +312,23 @@ eventGeneratorButton.addEventListener(click, function () {
 			parentEventCounter.other.counter,
 			`Other: ${otherEventCounter.length}`
 		);
+		deleteButton.addEventListener(click, function () {
+			deleteButton.parentElement.parentElement.remove();
+			otherEventCounter.pop(event);
+			textContent(
+				parentEventCounter.other.counter,
+				`Other: ${otherEventCounter.length}`
+			);
+			textContent(
+				totalEventCounter,
+				`Total: ${totalEventCount(
+					toDoEventCounter,
+					appointmentEventCounter,
+					otherEventCounter,
+					noteEventCounter
+				)}`
+			);
+		});
 	}
 
 	textContent(
@@ -349,6 +402,25 @@ noteGeneratorButton.addEventListener(click, function () {
 	textContent(completeButton, generateNote.button.completeText);
 	textContent(deleteButton, generateNote.button.deleteText);
 
+	deleteButton.addEventListener(click, function () {
+		deleteButton.parentElement.parentElement.remove();
+
+		noteEventCounter.pop(noteBox);
+		textContent(
+			parentEventCounter.note.counter,
+			`Notes: ${noteEventCounter.length}`
+		);
+		textContent(
+			totalEventCounter,
+			`Total: ${totalEventCount(
+				toDoEventCounter,
+				appointmentEventCounter,
+				otherEventCounter,
+				noteEventCounter
+			)}`
+		);
+	});
+
 	//??Functions for the noteBox Buttons(HERE)
 
 	noteEventCounter.push(noteBox);
@@ -371,4 +443,12 @@ noteGeneratorButton.addEventListener(click, function () {
 	toggleClass(eventFormContainer, flexActive);
 	toggleClass(noteForm.form, flexActive);
 	toggleClass(formOptionsContainer, flexInactive);
+});
+
+const testBtn = getById('test-btn');
+
+console.log(testBtn.parentElement.parentElement.parentElement);
+
+testBtn.addEventListener(click, function () {
+	testBtn.parentElement.parentElement.remove();
 });
