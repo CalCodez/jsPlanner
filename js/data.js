@@ -165,6 +165,11 @@ const parentEventCounter = {
 		container: getById('other-parent-container'),
 		counter: getById('other-count'),
 	},
+
+	note: {
+		container: getById('note-parent-container'),
+		counter: getById('note-count'),
+	},
 };
 
 const totalEventCounter = getById('total-event-count');
@@ -173,8 +178,9 @@ const appointmentEventCounter = Array.from(
 	parentEventCounter.appointment.container
 );
 const otherEventCounter = Array.from(parentEventCounter.other.container);
-const totalEventCount = (a, b, c) => {
-	return a.length + b.length + c.length;
+const noteEventCounter = Array.from(parentEventCounter.note.container);
+const totalEventCount = (a, b, c, d) => {
+	return a.length + b.length + c.length + d.length;
 };
 
 const generateEvent = {
@@ -242,8 +248,12 @@ eventGeneratorButton.addEventListener(click, function () {
 		addClass(toggles, generateEvent.button.buttonClass);
 		appendChild(rest[4], toggles);
 	}
-	textContent(eventBoxButtons[0], generateEvent.button.completeText);
-	textContent(eventBoxButtons[1], generateEvent.button.deleteText);
+
+	const [completeButton, deleteButton] = eventBoxButtons;
+	textContent(completeButton, generateEvent.button.completeText);
+	textContent(deleteButton, generateEvent.button.deleteText);
+
+	//??Functions for the eventBox Buttons(HERE)
 
 	if (generateEvent.type.formInput.value == 'To Do') {
 		appendChild(parentEventCounter.toDo.container, event);
@@ -273,7 +283,8 @@ eventGeneratorButton.addEventListener(click, function () {
 		`Total: ${totalEventCount(
 			toDoEventCounter,
 			appointmentEventCounter,
-			otherEventCounter
+			otherEventCounter,
+			noteEventCounter
 		)}`
 	);
 
@@ -291,30 +302,73 @@ const generateNote = {
 		formInput: getById('note-description'),
 		containerClass: 'note-description-container',
 	},
+	button: {
+		containerClass: 'event-button-container',
+		buttonClass: 'toggle-buttons',
+		completeText: 'Complete',
+		deleteText: 'Delete',
+	},
+	timeStamp: {
+		containerClass: 'event-timestamp-container',
+	},
 };
-const boxClasses = {};
 
-//??Close Containers on click and Escape key Default
+noteGeneratorButton.addEventListener(click, function () {
+	let noteContainers = [];
 
-const activeContainers = [];
-
-const exitContainer = (array) => {
-	for (let containerActive of array) {
-		containerActive.addEventListener(click, function () {
-			if (containerActive.classList.contains(flexActive)) {
-				toggleClass(containerActive, flexActive);
-			}
-
-			document.addEventListener(keyup, function (event) {
-				if (
-					event.key === 'Escape' &&
-					containerActive.classList.contains(flexActive)
-				) {
-					toggleClass(containerActive, flexActive);
-				}
-			});
-		});
+	for (let i = 0; i < 5; i++) {
+		noteContainers.push(createElement('div'));
 	}
-};
 
-exitContainer(activeContainers);
+	function buildNoteBox(array, object) {
+		addClass(array[0], object.noteBox);
+		addClass(array[1], object.type.containerClass);
+		addClass(array[2], object.description.containerClass);
+		addClass(array[3], object.button.containerClass);
+		addClass(array[4], object.timeStamp.containerClass);
+		textContent(array[1], 'Note');
+		textContent(array[2], object.description.formInput.value);
+		textContent(array[4], generateTimeStampString());
+	}
+	buildNoteBox(noteContainers, generateNote);
+	const [noteBox, ...rest] = noteContainers;
+	addClass(noteBox, 'container');
+	for (let i of rest) {
+		appendChild(noteBox, i);
+	}
+
+	let noteButtons = [];
+	for (let i = 0; i < 2; i++) {
+		noteButtons.push(createElement('buttons'));
+	}
+	for (let i of noteButtons) {
+		addClass(i, generateNote.button.buttonClass);
+		appendChild(rest[2], i);
+	}
+	const [completeButton, deleteButton] = noteButtons;
+	textContent(completeButton, generateNote.button.completeText);
+	textContent(deleteButton, generateNote.button.deleteText);
+
+	//??Functions for the noteBox Buttons(HERE)
+
+	noteEventCounter.push(noteBox);
+	textContent(
+		parentEventCounter.note.counter,
+		`Notes: ${noteEventCounter.length}`
+	);
+
+	textContent(
+		totalEventCounter,
+		`Total: ${totalEventCount(
+			toDoEventCounter,
+			appointmentEventCounter,
+			otherEventCounter,
+			noteEventCounter
+		)}`
+	);
+
+	appendChild(noteContainer, noteBox);
+	toggleClass(eventFormContainer, flexActive);
+	toggleClass(noteForm.form, flexActive);
+	toggleClass(formOptionsContainer, flexInactive);
+});
