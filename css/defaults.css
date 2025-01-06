@@ -286,6 +286,7 @@ label {
 	place-content: center;
 	place-items: center;
 	justify-content: space-around;
+	outline: var(--ol);
 }
 
 .event-timestamp-container {
@@ -295,6 +296,7 @@ label {
 	color: var(--white);
 	font-size: 0.8rem;
 	text-align: center;
+	outline: var(--ol);
 }
 
 .note-box {
