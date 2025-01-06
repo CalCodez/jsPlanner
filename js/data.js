@@ -42,7 +42,8 @@ sideMenuToggle.addEventListener(click, () => {
 
 //``Toggle Event Form Var and Function
 const eventFormTogglers = getByClass('create-event-togglers');
-const evenFormCancelButton = getById('cancel-btn');
+const cancelCrateButton = getById('cancel-create-button');
+
 const eventFormContainer = getById('create-event-container');
 for (let toggles of eventFormTogglers) {
 	toggles.addEventListener(click, function () {
@@ -52,17 +53,18 @@ for (let toggles of eventFormTogglers) {
 			toggleClass(eventFormContainer, flexActive);
 		}
 	});
+
+	cancelCrateButton.addEventListener(click, function () {
+		if (eventFormContainer.classList.contains(flexActive)) {
+			toggleClass(eventFormContainer, flexActive);
+		}
+	});
+
 	document.addEventListener(keyup, function (event) {
 		if (
 			event.key === 'Escape' &&
 			eventFormContainer.classList.contains(flexActive)
 		) {
-			toggleClass(eventFormContainer, flexActive);
-		}
-	});
-
-	evenFormCancelButton.addEventListener(click, function () {
-		if (eventFormContainer.classList.contains(flexActive)) {
 			toggleClass(eventFormContainer, flexActive);
 		}
 	});
@@ -106,6 +108,17 @@ const toggleForms = (
 			}
 		});
 	});
+
+	const cancelFormButtons = getByClass('cancel-form-buttons');
+	for (let cancelForm of cancelFormButtons) {
+		cancelForm.addEventListener(click, function () {
+			while (object1.form.classList.contains(flexActive)) {
+				toggleClass(object1.form, flexActive);
+				toggleClass(optionsContainer, flexInactive);
+				toggleClass(eventFormContainer, flexActive);
+			}
+		});
+	}
 };
 toggleForms(eventForm, noteForm);
 toggleForms(noteForm, eventForm);
