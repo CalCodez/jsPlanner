@@ -13,4 +13,5 @@
 --create a function that makes all generated event/note editable
 -- add eidt button to toggler the contenteditable
 --remove Side menu- add icons to nav toggle buttons
---create a mobile menu for responsive
+--create a mobile menu for responsive\
+--create a felx container to hold complete events (function)
