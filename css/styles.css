@@ -33,22 +33,23 @@
 	padding-left: 5px;
 }
 
-.logo-container,
-.main-toggle-container {
-	height: 100%;
-	width: 400px;
-}
-
 .logo-container {
 	color: var(--red-dark);
 	font-size: 2rem;
 	letter-spacing: 3px;
 	text-shadow: 1px 1px 3px var(--red-dark);
+	width: 400px;
+	height: 100%;
 }
 
 .main-toggle-container {
-	width: 500px;
+	width: 600px;
 	justify-content: space-around;
+}
+
+.main-toggle-container .toggle-buttons {
+	width: 110px;
+	column-gap: 5px;
 }
 
 .main-body-container {

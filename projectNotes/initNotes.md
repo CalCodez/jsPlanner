@@ -13,34 +13,30 @@
    -images
 
 3. TASK: Design
-   -Body build out
-   -Side BarMenu
-   -Generate From
-   -Clock
-   -Calendar
-   -Dashboard
-   -Notes
-
+   <!--^^Body build out-->
+   <!--^^Side BarMenu (removed)-->
+   <!--^^Generate From-->
+   <!--^^Clock-->
+   <!--^^Calendar (omited)-->
+   <!--^^Dashboard-->
+   <!--^^Notes-->^^
 4. TASK: Methods (js)
-   -Genarate Event Boxes- from genrate from
-   -Timestamp Function
-   -Genarete object
+   <!--^^Genarate Event Boxes- from genrate from-->
+   <!--^^Timestamp Function-->
+   <!--^^Genarete objec^^-->
 
 5. TASK: Pages
    -flexActive on click for each parent container
 
 6. TASK: Responsive
    -clean wrap;
-   -elemt adjust
+   -element adjust
    7.TASK: Animation
-   --sheesh
 
 TODO:LESSON:
 
 <!--capture input values--> used input with out wrapping them in a from element
 <!---form input value .js-->
-
-<!---submit ?page not foucn error 404-->
 
 -local storage (store: generate event boxex, to do list items, appointment-calander events)
 -transition

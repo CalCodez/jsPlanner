@@ -42,7 +42,7 @@ body {
 
 body {
 	width: 100%;
-	max-width: 1400px;
+	max-width: 1500px;
 	justify-self: center;
 	flex-direction: column;
 	background-color: var(--black-dark);
@@ -68,10 +68,10 @@ body {
 .complete-buttons,
 .delete-buttons {
 	width: 80px;
-	height: 30px;
+	height: 35px;
 	border-radius: 8px;
 	background-color: var(--black);
-	font-size: 0.6rem;
+	font-size: 0.7rem;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	padding: 5px;
 	color: var(--red-dark);
@@ -81,6 +81,10 @@ body {
 	display: flex;
 	place-content: center;
 	place-items: center;
+}
+
+.toggle-buttons i {
+	font-size: 1rem;
 }
 
 .toggle-buttons:hover {

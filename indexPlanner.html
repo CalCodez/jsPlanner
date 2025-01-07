@@ -22,11 +22,12 @@
           Dashboard
         </div>
         <div class="container main-toggle-container">
-          <button class="toggle-buttons create-event-togglers">Create</button>
-          <button class="toggle-buttons">To Do</button>
-          <button class="toggle-buttons">Appointments</button>
-          <button class="toggle-buttons">Other</button>
-          <button class="toggle-buttons">Notes</button>
+          <button class="toggle-buttons create-event-togglers"><i class="fa-solid fa-plus "> </i>Create</button>
+          <button class="toggle-buttons holder-toggle"><i class="fa-solid fa-list-check content"></i>To Do</button>
+          <button class="toggle-buttons holder-toggle"><i class="fa-regular fa-calendar-days content">
+            </i>Appointments</button>
+          <button class="toggle-buttons holder-toggle"><i class="fa-solid fa-bell content"></i>Other</button>
+          <button class="toggle-buttons holder-toggle"><i class="fa-solid fa-note-sticky content"></i>Notes</button>
         </div>
       </div>
 
@@ -52,16 +53,7 @@
     </div>
 
     <div class="main-body-container container">
-      <div id="side-menu-container" class="side-menu-container container ">
 
-        <span class=" content side-menu-spans"><i id="side-menu-toggler" class="fa-solid fa-bars"></i>Close Menu</span>
-        <span class="content side-menu-spans create-event-togglers"><i class="fa-solid fa-plus "> </i>Create</span>
-        <span class="content side-menu-spans"><i class="fa-solid fa-list-check content"></i>To DO</span>
-        <span class="content side-menu-spans"><i class="fa-regular fa-calendar-days content"> </i>Appointments</span>
-        <span class="content side-menu-spans"><i class="fa-solid fa-bell content"></i>other</span>
-        <span class="content side-menu-spans"><i class="fa-solid fa-note-sticky content"></i>Notes</span>
-
-      </div>
 
       <div class="main-display-container container">
         <div id="toDo-event-holder" class="container event-holder-container">
@@ -191,7 +183,6 @@
 
       </div>
 
-      <script src="/js/data.js"></script>
       <script src="/js/main.js"></script>
   </body>
 
