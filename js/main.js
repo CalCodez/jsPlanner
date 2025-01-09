@@ -368,6 +368,67 @@ const eventHolders = {
 	otherHolder: { toggle: otherToggle, holder: getById('other-event-holder') },
 	noteHolder: { toggle: noteToggle, holder: getById('note-event-holder') },
 };
+
+const { todoHolder, appointmentHolder, otherHolder, noteHolder } = eventHolders;
+
+const toggleEventHolders = (object1, object2, object3, object4) => {
+	const holderToggled = 'holder-toggled';
+
+	object1.toggle.addEventListener(click, function () {
+		if (
+			!object1.holder.classList.contains(holderToggled) &&
+			!object2.holder.classList.contains(holderToggled) &&
+			!object3.holder.classList.contains(holderToggled) &&
+			!object4.holder.classList.contains(holderToggled)
+		) {
+			toggleClass(object1.holder, holderToggled);
+			toggleClass(object2.holder, flexInactive);
+			toggleClass(object3.holder, flexInactive);
+			toggleClass(object4.holder, flexInactive);
+		} else if (
+			object1.holder.classList.contains(flexInactive) &&
+			object2.holder.classList.contains(holderToggled) &&
+			object3.holder.classList.contains(flexInactive) &&
+			object4.holder.classList.contains(flexInactive)
+		) {
+			removeClass(object1.holder, flexInactive);
+			addClass(object1.holder, holderToggled);
+			removeClass(object2.holder, holderToggled);
+			addClass(object2.holder, flexInactive);
+		} else if (
+			object1.holder.classList.contains(flexInactive) &&
+			object2.holder.classList.contains(flexInactive) &&
+			object3.holder.classList.contains(holderToggled) &&
+			object4.holder.classList.contains(flexInactive)
+		) {
+			removeClass(object1.holder, flexInactive);
+			addClass(object1.holder, holderToggled);
+			removeClass(object3.holder, holderToggled);
+			addClass(object3.holder, flexInactive);
+		} else if (
+			object1.holder.classList.contains(flexInactive) &&
+			object2.holder.classList.contains(flexInactive) &&
+			object3.holder.classList.contains(flexInactive) &&
+			object4.holder.classList.contains(holderToggled)
+		) {
+			removeClass(object1.holder, flexInactive);
+			addClass(object1.holder, holderToggled);
+			removeClass(object4.holder, holderToggled);
+			addClass(object4.holder, flexInactive);
+		} else {
+			toggleClass(object1.holder, holderToggled);
+			removeClass(object2.holder, flexInactive);
+			removeClass(object3.holder, flexInactive);
+			removeClass(object4.holder, flexInactive);
+		}
+	});
+};
+
+toggleEventHolders(todoHolder, appointmentHolder, otherHolder, noteHolder);
+toggleEventHolders(appointmentHolder, todoHolder, otherHolder, noteHolder);
+toggleEventHolders(otherHolder, todoHolder, appointmentHolder, noteHolder);
+toggleEventHolders(noteHolder, todoHolder, appointmentHolder, otherHolder);
+
 console.log(eventHolders);
 
 //CSS: create an active class that toggles on the target container to 100% on click;
