@@ -27,9 +27,34 @@ const dateDisplay = getById('date-container');
 
 dateDisplay.innerText = generateTimeStampString();
 
-//``Toggle SideBar Menu var and Function
-const sideMenuToggle = getById('side-menu-toggler');
-const sideMenuContainer = getById('side-menu-container');
+const completedEventContainer = getById('completed-events-container');
+const completedItemsContainer = getById('completed-items-container');
+const toggleCompletedEventsContainer = (
+	container = completedEventContainer
+) => {
+	const completedEventsToggler = getById('completed-events-toggler');
+	const menuCaret = getById('menu-caret');
+	const caretOpen = 'fa-caret-left';
+	const caretClose = 'fa-caret-right';
+	const completedHeader = getById('completed-header');
+	const eventContainerActive = 'completed-active';
+
+	completedEventsToggler.addEventListener(click, function () {
+		if (!container.classList.contains(eventContainerActive)) {
+			toggleClass(container, eventContainerActive);
+			toggleClass(completedHeader, flexInactive);
+			removeClass(menuCaret, caretOpen);
+			addClass(menuCaret, caretClose);
+		} else {
+			toggleClass(container, eventContainerActive);
+			toggleClass(completedHeader, flexInactive);
+			removeClass(menuCaret, caretClose);
+			addClass(menuCaret, caretOpen);
+		}
+	});
+};
+
+toggleCompletedEventsContainer();
 
 //``Toggle Event Form Var and Function
 const eventFormTogglers = getByClass('create-event-togglers');
@@ -179,6 +204,18 @@ const deleteEvent = (toggler, parent, item, obj) => {
 	});
 };
 
+const completeEvent = (toggler, parent, item, obj) => {
+	toggler.addEventListener(click, function () {
+		toggler.parentElement.parentElement.remove();
+		appendChild(completedItemsContainer, toggler.parentElement.parentElement);
+		parent.pop(item);
+		textContent(obj.counter, `${obj.name}: ${parent.length}`);
+		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
+	});
+};
+
+console.log(completedItemsContainer);
+
 const generateEvent = {
 	eventBox: 'event-box',
 	type: {
@@ -258,6 +295,7 @@ eventGeneratorButton.addEventListener(click, function () {
 		textContent(toDo.counter, `To Do: ${toDoEventCounter.length}`);
 		//eventBox complete function (here)
 
+		completeEvent(completeButton, toDoEventCounter, event, toDo);
 		deleteEvent(deleteButton, toDoEventCounter, event, toDo);
 	} else if (generateEvent.type.formInput.value == 'Appointment') {
 		appendChild(appointment.container, event);
@@ -267,14 +305,14 @@ eventGeneratorButton.addEventListener(click, function () {
 			`Appointments: ${appointmentEventCounter.length}`
 		);
 
-		//eventBox complete function (here)
+		completeEvent(completeButton, appointmentEventCounter, event, appointment);
 		deleteEvent(deleteButton, appointmentEventCounter, event, appointment);
 	} else if (generateEvent.type.formInput.value == 'Other') {
 		appendChild(other.container, event);
 		otherEventCounter.push(event);
 		textContent(other.counter, `Other: ${otherEventCounter.length}`);
-		//eventBox complete function (here)
 
+		completeEvent(completeButton, otherEventCounter, event, other);
 		deleteEvent(deleteButton, otherEventCounter, event, other);
 	}
 
@@ -345,6 +383,7 @@ noteGeneratorButton.addEventListener(click, function () {
 
 	noteEventCounter.push(noteBox);
 	textContent(note.counter, `Notes: ${noteEventCounter.length}`);
+	completeEvent(completeButton, noteEventCounter, noteBox, note);
 	deleteEvent(deleteButton, noteEventCounter, noteBox, note);
 
 	textContent(totalEventCounter, `Total: ${totalEventCount()}`);
@@ -428,8 +467,3 @@ toggleEventHolders(todoHolder, appointmentHolder, otherHolder, noteHolder);
 toggleEventHolders(appointmentHolder, todoHolder, otherHolder, noteHolder);
 toggleEventHolders(otherHolder, todoHolder, appointmentHolder, noteHolder);
 toggleEventHolders(noteHolder, todoHolder, appointmentHolder, otherHolder);
-
-console.log(eventHolders);
-
-//CSS: create an active class that toggles on the target container to 100% on click;
-//JS: apply flexInActive on other containers on click

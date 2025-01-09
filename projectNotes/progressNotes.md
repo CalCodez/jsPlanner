@@ -10,11 +10,12 @@
 <!----create a function that keeps talles of the number of tolat and each total events-->
 <!----remove Side menu- add icons to nav toggle buttons-->
 
-1. create a function that toggles the event holder contianers
-   -CSS: create an active class that toggles on the target container to 100% on click;
-   -JS: apply flexInActive on other containers on click
+<!--1. create a function that toggles the event holder contianers-->
+   <!--``CSS: create an active class that toggles on the target container to 100% on click;-->
+   <!--``JS: apply flexInActive on other containers on click-->
 
 --create a function that makes all generated event/note editable
+
 -- add eidt button to toggler the contenteditable
---create a mobile menu for responsive\
+--create a mobile menu for responsive
 --create a felx container to hold completed events (function)
