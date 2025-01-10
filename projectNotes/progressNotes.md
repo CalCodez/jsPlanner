@@ -11,11 +11,15 @@
 <!----remove Side menu- add icons to nav toggle buttons-->
 
 <!--1. create a function that toggles the event holder contianers-->
-   <!--``CSS: create an active class that toggles on the target container to 100% on click;-->
-   <!--``JS: apply flexInActive on other containers on click-->
+   <!--CSS: create an active class that toggles on the target container to 100% on click;-->
+   <!--JS: apply flexInActive on other containers on click-->
 
---create a function that makes all generated event/note editable
+--Wrok on local storage function to protect from refresh
 
--- add eidt button to toggler the contenteditable
+<!-- !!Note box button container and even box button container buttons needs same styles -->
+
+--work mobile responsive
+--style/theme needs attetnion
+
 --create a mobile menu for responsive
 --create a felx container to hold completed events (function)
