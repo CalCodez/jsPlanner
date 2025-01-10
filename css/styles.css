@@ -57,8 +57,7 @@
 	height: 80%;
 	position: relative;
 	background-color: var(--black);
-	padding: 8px;
-	margin-bottom: 10px;
+	padding: 5px;
 }
 
 /* Remove Side-menu */
