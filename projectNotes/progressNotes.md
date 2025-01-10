@@ -14,9 +14,7 @@
    <!--CSS: create an active class that toggles on the target container to 100% on click;-->
    <!--JS: apply flexInActive on other containers on click-->
 
---Wrok on local storage function to protect from refresh
-
-<!-- !!Note box button container and even box button container buttons needs same styles -->
+--Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)
 
 --work mobile responsive
 --style/theme needs attetnion
