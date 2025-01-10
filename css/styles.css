@@ -60,44 +60,6 @@
 	padding: 5px;
 }
 
-/* Remove Side-menu */
-.side-menu-container {
-	width: 35px;
-	height: 100%;
-	box-shadow: 1px 1px 5px var(--red-dark);
-	position: absolute;
-	background-color: var(--black);
-	left: 0;
-	flex-direction: column;
-	overflow: hidden;
-	text-align: left;
-	transition: width ease 0.5s;
-	flex-wrap: nowrap;
-	justify-content: space-around;
-	z-index: 1;
-}
-
-.side-menu-container.active {
-	width: 180px;
-}
-
-.side-menu-spans {
-	height: 1.5rem;
-	width: 95%;
-	color: var(--red-dark);
-	align-items: center;
-	font-size: 1.2rem;
-	justify-content: flex-start;
-	column-gap: 10px;
-	padding-left: 10px;
-	text-wrap: nowrap;
-	cursor: pointer;
-}
-
-.side-menu-spans:hover {
-	transform: scale(1.1);
-}
-
 .fa-solid,
 .fa-regular {
 	color: var(--red-dark);

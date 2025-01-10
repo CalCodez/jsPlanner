@@ -38,6 +38,7 @@ const toggleCompletedEventsContainer = (
 	const caretClose = 'fa-caret-right';
 	const completedHeader = getById('completed-header');
 	const eventContainerActive = 'completed-active';
+	const clearCompletedItemsButton = getById('clear-completed-items-toggle');
 
 	completedEventsToggler.addEventListener(click, function () {
 		if (!container.classList.contains(eventContainerActive)) {
@@ -45,11 +46,20 @@ const toggleCompletedEventsContainer = (
 			toggleClass(completedHeader, flexInactive);
 			removeClass(menuCaret, caretOpen);
 			addClass(menuCaret, caretClose);
+			clearCompletedItemsButton.style.visibility = 'visible';
 		} else {
 			toggleClass(container, eventContainerActive);
 			toggleClass(completedHeader, flexInactive);
 			removeClass(menuCaret, caretClose);
 			addClass(menuCaret, caretOpen);
+			clearCompletedItemsButton.style.visibility = 'hidden';
+		}
+	});
+
+	clearCompletedItemsButton.addEventListener(click, function () {
+		console.log(completedItemsContainer.firstChild);
+		while (completedItemsContainer.firstChild) {
+			removeChild(completedItemsContainer, completedItemsContainer.firstChild);
 		}
 	});
 };
@@ -213,8 +223,6 @@ const completeEvent = (toggler, parent, item, obj) => {
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 	});
 };
-
-console.log(completedItemsContainer);
 
 const generateEvent = {
 	eventBox: 'event-box',
