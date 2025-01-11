@@ -196,6 +196,29 @@ const appointmentEventCounter = Array.from(
 const otherEventCounter = Array.from(parentEventCounter.other.container);
 const noteEventCounter = Array.from(parentEventCounter.note.container);
 
+//LocalStorage Functions
+
+const parentArrays = [
+	toDoEventCounter,
+	appointmentEventCounter,
+	otherEventCounter,
+	noteEventCounter,
+];
+let items = [];
+
+// Function to save data to localStorage
+const saveToLocalStorage = () => {
+	localStorage.setItem('items', JSON.stringify(items));
+};
+
+const loadFromLocalStorage = () => {
+	const storedItems = JSON.parse(localStorage.getItem('items')) || [];
+	storedItems.forEach((item) => {
+		generateBox(item, false); // Regenerate UI from saved data
+	});
+	items = storedItems;
+};
+
 function totalEventCount() {
 	return (
 		toDoEventCounter.length +
