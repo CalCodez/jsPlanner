@@ -18,3 +18,56 @@ const extractEventData = (eventNode) => {
 		).textContent,
 	};
 };
+const extractNoteData = (eventNode) => {
+	return {
+		type: eventNode.querySelector(`.${generateNote.type.containerClass}`)
+			.textContent,
+		description: eventNode.querySelector(
+			`.${generateNote.description.containerClass}`
+		).textContent,
+	};
+};
+
+const loadFromLocalStorage = (key) => {
+	const data = localStorage.getItem(key);
+	const parsedData = data ? JSON.parse(data) : [];
+
+	// Create event nodes with applied classes
+	const createEventNode = (event) => {
+		if (!key == 'note') {
+			const eventNode = document.createElement('div');
+			addClass(eventNode, generateEvent.eventBox); // Optional: Add a general class for styling
+
+			const typeDiv = document.createElement('div');
+			addClass(typeDiv, generateEvent.type.containerClass);
+			typeDiv.textContent = event.type;
+			eventNode.appendChild(typeDiv);
+
+			const titleDiv = document.createElement('div');
+			addClass(title, generateEvent.title.containerClass);
+
+			titleDiv.textContent = event.title;
+			eventNode.appendChild(titleDiv);
+
+			const dateDiv = document.createElement('div');
+			addClass(dateDiv, generateEvent.date.containerClass);
+			dateDiv.textContent = event.date;
+			eventNode.appendChild(dateDiv);
+
+			const descriptionDiv = document.createElement('div');
+			addClass(descriptionDiv, generateEvent.description.containerClass);
+			descriptionDiv.textContent = event.description;
+			eventNode.appendChild(descriptionDiv);
+
+			const timeStampDiv = document.createElement('div');
+			timeStampDiv.classList.add(generateEvent.timeStamp.containerClass);
+			addClass(timeStampDiv, generateEvent.timeStamp.containerClass);
+
+			timeStampDiv.textContent = event.timeStamp;
+			eventNode.appendChild(timeStampDiv);
+
+			return eventNode;
+		}
+	};
+	return parsedData.map(createEventNode);
+};

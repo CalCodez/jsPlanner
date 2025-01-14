@@ -230,6 +230,78 @@ const extractNoteData = (eventNode) => {
 	};
 };
 
+const loadFromLocalStorage = (key) => {
+	const data = localStorage.getItem(key);
+	const parsedData = data ? JSON.parse(data) : [];
+
+	// Create event nodes with applied classes
+	const createEventNode = (event) => {
+		const eventNode = document.createElement('div');
+		addClass(eventNode, generateEvent.eventBox);
+		addClass(eventNode, 'container'); // Optional: Add a general class for styling
+
+		const typeDiv = document.createElement('div');
+		addClass(typeDiv, generateEvent.type.containerClass);
+		typeDiv.textContent = event.type;
+		eventNode.appendChild(typeDiv);
+
+		const titleDiv = document.createElement('div');
+		addClass(titleDiv, generateEvent.title.containerClass);
+
+		titleDiv.textContent = event.title;
+		eventNode.appendChild(titleDiv);
+
+		const dateDiv = document.createElement('div');
+		addClass(dateDiv, generateEvent.date.containerClass);
+		dateDiv.textContent = event.date;
+		eventNode.appendChild(dateDiv);
+
+		const descriptionDiv = document.createElement('div');
+		addClass(descriptionDiv, generateEvent.description.containerClass);
+		descriptionDiv.textContent = event.description;
+		eventNode.appendChild(descriptionDiv);
+
+		const buttonContainer = createElement('div');
+		addClass(buttonContainer, generateEvent.button.containerClass);
+		let buttons = [];
+		for (let i = 0; i < 2; i++) {
+			buttons.push(createElement('button'));
+		}
+		for (let i of buttons) {
+			appendChild(buttonContainer, i);
+		}
+
+		const [completeButton, deleteButton] = buttons;
+		addClass(completeButton, generateEvent.button.buttonClass);
+		addClass(deleteButton, generateEvent.button.buttonClass);
+		textContent(completeButton, generateEvent.button.completeText);
+		textContent(deleteButton, generateEvent.button.deleteText);
+		appendChild(eventNode, buttonContainer);
+
+		completeButton.addEventListener(click, function () {
+			completeButton.parentElement.parentElement.remove();
+			appendChild(
+				completedItemsContainer,
+				completeButton.parentElement.parentElement
+			);
+		});
+		deleteButton.addEventListener(click, function () {
+			deleteButton.parentElement.parentElement.remove();
+		});
+
+		const timeStampDiv = document.createElement('div');
+		timeStampDiv.classList.add(generateEvent.timeStamp.containerClass);
+		addClass(timeStampDiv, generateEvent.timeStamp.containerClass);
+
+		timeStampDiv.textContent = event.timeStamp;
+		eventNode.appendChild(timeStampDiv);
+
+		return eventNode;
+	};
+
+	return parsedData.map(createEventNode);
+};
+
 function totalEventCount() {
 	return (
 		toDoEventCounter.length +
@@ -358,85 +430,22 @@ eventGeneratorButton.addEventListener(click, function () {
 		textContent(other.counter, `Other: ${otherEventCounter.length}`);
 		completeEvent(completeButton, otherEventCounter, event, other);
 		deleteEvent(deleteButton, otherEventCounter, event, other);
+	} else if (generateEvent.type.formInput.value == 'Note') {
+		noteEventCounter.push(eventData);
+		saveToLocalStorage('notes', noteEventCounter);
+
+		textContent(note.counter, `Notes: ${noteEventCounter.length}`);
+		completeEvent(completeButton, noteEventCounter, event, note);
+		deleteEvent(deleteButton, noteEventCounter, noteBox, note);
+
+		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
+
+		appendChild(noteContainer, noteBox);
 	}
 
 	textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 	toggleClass(eventFormContainer, flexActive);
 	toggleClass(eventForm.form, flexActive);
-	toggleClass(formOptionsContainer, flexInactive);
-});
-
-const noteGeneratorButton = getById('generate-note-btn');
-
-const generateNote = {
-	noteBox: 'note-box',
-	type: { input: 'Note', containerClass: 'note-type-container' },
-	description: {
-		formInput: getById('note-description'),
-		containerClass: 'note-description-container',
-	},
-	button: {
-		containerClass: 'event-button-container',
-		buttonClass: 'toggle-buttons',
-		completeText: 'Complete',
-		deleteText: 'Delete',
-	},
-	timeStamp: {
-		containerClass: 'event-timestamp-container',
-	},
-};
-
-noteGeneratorButton.addEventListener(click, function () {
-	let noteContainers = [];
-
-	for (let i = 0; i < 5; i++) {
-		noteContainers.push(createElement('div'));
-	}
-
-	const [noteMain, type, description, button, timeStamp] = noteContainers;
-
-	addClass(noteMain, generateNote.noteBox);
-	addClass(type, generateNote.type.containerClass);
-	addClass(description, generateNote.description.containerClass);
-	addClass(button, generateNote.button.containerClass);
-	addClass(timeStamp, generateNote.timeStamp.containerClass);
-	textContent(type, 'Note');
-	textContent(description, generateNote.description.formInput.value);
-	textContent(timeStamp, generateTimeStampString());
-
-	const [noteBox, ...rest] = noteContainers;
-	addClass(noteBox, 'container');
-	for (let i of rest) {
-		appendChild(noteBox, i);
-	}
-
-	let noteButtons = [];
-	for (let i = 0; i < 2; i++) {
-		noteButtons.push(createElement('buttons'));
-	}
-	for (let i of noteButtons) {
-		addClass(i, generateNote.button.buttonClass);
-		appendChild(rest[2], i);
-	}
-	const [completeButton, deleteButton] = noteButtons;
-	textContent(completeButton, generateNote.button.completeText);
-	textContent(deleteButton, generateNote.button.deleteText);
-
-	const clonedEvent = noteBox.cloneNode(true);
-	const eventData = extractNoteData(clonedEvent);
-
-	noteEventCounter.push(eventData);
-	saveToLocalStorage('notes', noteEventCounter);
-
-	textContent(note.counter, `Notes: ${noteEventCounter.length}`);
-	completeEvent(completeButton, noteEventCounter, noteBox, note);
-	deleteEvent(deleteButton, noteEventCounter, noteBox, note);
-
-	textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-
-	appendChild(noteContainer, noteBox);
-	toggleClass(eventFormContainer, flexActive);
-	toggleClass(noteForm.form, flexActive);
 	toggleClass(formOptionsContainer, flexInactive);
 });
 
@@ -513,3 +522,39 @@ toggleEventHolders(todoHolder, appointmentHolder, otherHolder, noteHolder);
 toggleEventHolders(appointmentHolder, todoHolder, otherHolder, noteHolder);
 toggleEventHolders(otherHolder, todoHolder, appointmentHolder, noteHolder);
 toggleEventHolders(noteHolder, todoHolder, appointmentHolder, otherHolder);
+
+console.log(loadFromLocalStorage('appointments', appointmentEventCounter));
+
+const storageKeys = [
+	'toDo',
+	'appointments',
+	'other',
+	'notes',
+	'completedEvents',
+];
+
+//const loadEvents = loadFromLocalStorage(array);
+
+for (let key of storageKeys) {
+	if (key == 'toDo') {
+		loadFromLocalStorage('toDo').forEach((eventNode) =>
+			appendChild(toDoContainer, eventNode)
+		);
+	} else if (key == 'appointments') {
+		loadFromLocalStorage('appointments').forEach((eventNode) =>
+			appendChild(appointmentContainer, eventNode)
+		);
+	} else if (key == 'other') {
+		loadFromLocalStorage('other').forEach((eventNode) =>
+			appendChild(otherContainer, eventNode)
+		);
+	}
+	if (key == 'notes') {
+		loadFromLocalStorage('notes').forEach((eventNode) =>
+			appendChild(noteContainer, eventNode)
+		);
+	}
+}
+
+//loadEvents.forEach((eventNode) => appendChild(appointmentContainer, eventNode));
+//otherEvents.forEach((eventNode) => appendChild(otherContainer, eventNode));
