@@ -13,11 +13,10 @@
 <!--1. create a function that toggles the event holder contianers-->
    <!--CSS: create an active class that toggles on the target container to 100% on click;-->
    <!--JS: apply flexInActive on other containers on click-->
+<!----create a felx container to hold completed events (function)-->
 
---Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)
-
+--(reworkd and add animations)style/theme needs attetnion
 --work mobile responsive
---style/theme needs attetnion
-
 --create a mobile menu for responsive
---create a felx container to hold completed events (function)
+
+--(do last)Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)
