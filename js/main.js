@@ -217,19 +217,6 @@ const extractEventData = (eventNode) => {
 	};
 };
 
-const extractNoteData = (eventNode) => {
-	return {
-		type: eventNode.querySelector(`.${generateNote.type.containerClass}`)
-			.textContent,
-		description: eventNode.querySelector(
-			`.${generateNote.description.containerClass}`
-		).textContent,
-		timeStamp: eventNode.querySelector(
-			`.${generateNote.timeStamp.containerClass}`
-		).textContent,
-	};
-};
-
 const loadFromLocalStorage = (key) => {
 	const data = localStorage.getItem(key);
 	const parsedData = data ? JSON.parse(data) : [];
@@ -439,11 +426,11 @@ eventGeneratorButton.addEventListener(click, function () {
 
 		textContent(note.counter, `Notes: ${noteEventCounter.length}`);
 		completeEvent(completeButton, noteEventCounter, eventData, note);
-		deleteEvent(deleteButton, noteEventCounter, noteBox, note);
+		deleteEvent(deleteButton, noteEventCounter, event, note);
 
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 
-		appendChild(noteContainer, noteBox);
+		appendChild(noteContainer, eventBox);
 	}
 
 	textContent(totalEventCounter, `Total: ${totalEventCount()}`);

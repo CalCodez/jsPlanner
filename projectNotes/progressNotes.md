@@ -19,4 +19,11 @@
 --work mobile responsive
 --create a mobile menu for responsive
 
---(do last)Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)
+--Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)
+
+--remove from local storage function
+--save to local storage function for the completed items container
+--updae counters on local storage function()
+
+--delete all notebox classes and fucntion(conveted noted in to generateEvnts)
+--update the crate eventform (remove the note form and buttons)
