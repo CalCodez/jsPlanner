@@ -195,7 +195,7 @@ const appointmentEventCounter = Array.from(
 );
 const otherEventCounter = Array.from(parentEventCounter.other.container);
 const noteEventCounter = Array.from(parentEventCounter.note.container);
-
+const competedItemsContainer = Array.from(completedItemsContainer);
 const saveToLocalStorage = (key, array) => {
 	localStorage.setItem(key, JSON.stringify(array));
 };
@@ -327,6 +327,9 @@ const completeEvent = (toggler, parent, item, obj) => {
 		parent.pop(item);
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
+		const eventData = cloneNode(item);
+		completedItemsContainer.push(eventData);
+		saveToLocalStorage('completedItems', completedItemsContainer);
 	});
 };
 
@@ -411,7 +414,7 @@ eventGeneratorButton.addEventListener(click, function () {
 		toDoEventCounter.push(eventData);
 		textContent(toDo.counter, `To Do: ${toDoEventCounter.length}`);
 		saveToLocalStorage('todo', toDoEventCounter);
-		completeEvent(completeButton, toDoEventCounter, event, toDo);
+		completeEvent(completeButton, toDoEventCounter, eventData, toDo);
 		deleteEvent(deleteButton, toDoEventCounter, event, toDo);
 	} else if (generateEvent.type.formInput.value == 'Appointment') {
 		appendChild(appointment.container, event);
@@ -422,7 +425,7 @@ eventGeneratorButton.addEventListener(click, function () {
 		);
 		saveToLocalStorage('appointments', appointmentEventCounter);
 		completeEvent(completeButton, appointmentEventCounter, event, appointment);
-		deleteEvent(deleteButton, appointmentEventCounter, event, appointment);
+		deleteEvent(deleteButton, appointmentEventCounter, eventData, appointment);
 	} else if (generateEvent.type.formInput.value == 'Other') {
 		appendChild(other.container, event);
 		otherEventCounter.push(eventData);
@@ -435,7 +438,7 @@ eventGeneratorButton.addEventListener(click, function () {
 		saveToLocalStorage('notes', noteEventCounter);
 
 		textContent(note.counter, `Notes: ${noteEventCounter.length}`);
-		completeEvent(completeButton, noteEventCounter, event, note);
+		completeEvent(completeButton, noteEventCounter, eventData, note);
 		deleteEvent(deleteButton, noteEventCounter, noteBox, note);
 
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
@@ -530,7 +533,7 @@ const storageKeys = [
 	'appointments',
 	'other',
 	'notes',
-	'completedEvents',
+	'completedItems',
 ];
 
 //const loadEvents = loadFromLocalStorage(array);
@@ -548,10 +551,13 @@ for (let key of storageKeys) {
 		loadFromLocalStorage('other').forEach((eventNode) =>
 			appendChild(otherContainer, eventNode)
 		);
-	}
-	if (key == 'notes') {
+	} else if (key == 'notes') {
 		loadFromLocalStorage('notes').forEach((eventNode) =>
 			appendChild(noteContainer, eventNode)
+		);
+	} else if (key === 'completedItems') {
+		loadFromLocalStorage('completedItems').forEach((eventNode) =>
+			appendChild(completedItemsContainer, eventNode)
 		);
 	}
 }
