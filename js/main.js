@@ -217,13 +217,18 @@ const extractEventData = (eventNode) => {
 	};
 };
 
-const parentArrays = [
-	toDoEventCounter,
-	appointmentEventCounter,
-	otherEventCounter,
-	noteEventCounter,
-];
-let items = [];
+const extractNoteData = (eventNode) => {
+	return {
+		type: eventNode.querySelector(`.${generateNote.type.containerClass}`)
+			.textContent,
+		description: eventNode.querySelector(
+			`.${generateNote.description.containerClass}`
+		).textContent,
+		timeStamp: eventNode.querySelector(
+			`.${generateNote.timeStamp.containerClass}`
+		).textContent,
+	};
+};
 
 function totalEventCount() {
 	return (
@@ -331,36 +336,31 @@ eventGeneratorButton.addEventListener(click, function () {
 
 	if (generateEvent.type.formInput.value == 'To Do') {
 		appendChild(toDo.container, event);
-		toDoEventCounter.push(clonedEvent);
-
+		toDoEventCounter.push(eventData);
 		textContent(toDo.counter, `To Do: ${toDoEventCounter.length}`);
-		saveToLocalStorage('todo', eventData);
-
+		saveToLocalStorage('todo', toDoEventCounter);
 		completeEvent(completeButton, toDoEventCounter, event, toDo);
 		deleteEvent(deleteButton, toDoEventCounter, event, toDo);
 	} else if (generateEvent.type.formInput.value == 'Appointment') {
 		appendChild(appointment.container, event);
-		appointmentEventCounter.push(clonedEvent);
-
+		appointmentEventCounter.push(eventData);
 		textContent(
 			appointment.counter,
 			`Appointments: ${appointmentEventCounter.length}`
 		);
-		saveToLocalStorage('appointments', eventData);
+		saveToLocalStorage('appointments', appointmentEventCounter);
 		completeEvent(completeButton, appointmentEventCounter, event, appointment);
 		deleteEvent(deleteButton, appointmentEventCounter, event, appointment);
 	} else if (generateEvent.type.formInput.value == 'Other') {
 		appendChild(other.container, event);
-		otherEventCounter.push(clonedEvent);
+		otherEventCounter.push(eventData);
+		saveToLocalStorage('other', otherEventCounter);
 		textContent(other.counter, `Other: ${otherEventCounter.length}`);
-
 		completeEvent(completeButton, otherEventCounter, event, other);
 		deleteEvent(deleteButton, otherEventCounter, event, other);
 	}
 
 	textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-	saveToLocalStorage('other', eventData);
-
 	toggleClass(eventFormContainer, flexActive);
 	toggleClass(eventForm.form, flexActive);
 	toggleClass(formOptionsContainer, flexInactive);
@@ -423,8 +423,11 @@ noteGeneratorButton.addEventListener(click, function () {
 	textContent(deleteButton, generateNote.button.deleteText);
 
 	const clonedEvent = noteBox.cloneNode(true);
+	const eventData = extractNoteData(clonedEvent);
 
-	noteEventCounter.push(clonedEvent);
+	noteEventCounter.push(eventData);
+	saveToLocalStorage('notes', noteEventCounter);
+
 	textContent(note.counter, `Notes: ${noteEventCounter.length}`);
 	completeEvent(completeButton, noteEventCounter, noteBox, note);
 	deleteEvent(deleteButton, noteEventCounter, noteBox, note);
