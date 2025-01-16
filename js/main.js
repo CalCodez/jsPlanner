@@ -197,6 +197,7 @@ const appointmentEventCounter = Array.from(
 );
 const otherEventCounter = Array.from(parentEventCounter.other.container);
 const noteEventCounter = Array.from(parentEventCounter.note.container);
+
 const saveToLocalStorage = (key, array) => {
 	localStorage.setItem(key, JSON.stringify(array));
 };
@@ -391,15 +392,8 @@ const deleteEvent = (toggler, parent, item, obj, key) => {
 		parent.pop(item);
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-
-		if (
-			!toggler.parentElement.parentElement.parentElement ==
-			completedItemsContainer
-		) {
-			removeFromLocalStorage(key, 0);
-		} else {
-			removeFromLocalStorage('completedItems', 0);
-		}
+		removeFromLocalStorage(key, 0);
+		removeFromLocalStorage('completedItems', 0);
 	});
 };
 
@@ -490,8 +484,6 @@ eventGeneratorButton.addEventListener(click, function () {
 
 	const clonedEvent = event.cloneNode(true);
 	const eventData = extractEventData(clonedEvent);
-
-	console.log(typeof clonedEvent);
 
 	if (generateEvent.type.formInput.value == 'To Do') {
 		appendChild(toDo.container, event);
