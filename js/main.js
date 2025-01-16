@@ -391,7 +391,15 @@ const deleteEvent = (toggler, parent, item, obj, key) => {
 		parent.pop(item);
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-		removeFromLocalStorage(key, 0);
+
+		if (
+			!toggler.parentElement.parentElement.parentElement ==
+			completedItemsContainer
+		) {
+			removeFromLocalStorage(key, 0);
+		} else {
+			removeFromLocalStorage('completedItems', 0);
+		}
 	});
 };
 
