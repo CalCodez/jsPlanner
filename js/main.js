@@ -60,6 +60,7 @@ const toggleCompletedEventsContainer = (
 		console.log(completedItemsContainer.firstChild);
 		while (completedItemsContainer.firstChild) {
 			removeChild(completedItemsContainer, completedItemsContainer.firstChild);
+			localStorage.removeItem('completedItems');
 		}
 	});
 };
@@ -266,14 +267,73 @@ const loadFromLocalStorage = (key) => {
 		appendChild(eventNode, buttonContainer);
 
 		completeButton.addEventListener(click, function () {
-			completeButton.parentElement.parentElement.remove();
-			appendChild(
-				completedItemsContainer,
-				completeButton.parentElement.parentElement
-			);
+			if (
+				completeButton.parentElement.parentElement.parentElement ==
+				toDo.container
+			) {
+				completeEvent(completeButton, toDoEventCounter, event, toDo, 'todo');
+			} else if (
+				completeButton.parentElement.parentElement.parentElement ==
+				appointment.container
+			) {
+				completeEvent(
+					completeButton,
+					appointmentEventCounter,
+					event,
+					appointment,
+					'appointments'
+				);
+			} else if (
+				completeButton.parentElement.parentElement.parentElement ==
+				other.container
+			) {
+				completeEvent(
+					completeButton,
+					otherEventCounter,
+					eventData,
+					other,
+					'other'
+				);
+			} else if (
+				completeButton.parentElement.parentElement.parentElement ==
+				note.container
+			) {
+				completeEvent(completeButton, noteEventCounter, event, note, 'notes');
+			}
 		});
+
 		deleteButton.addEventListener(click, function () {
-			deleteButton.parentElement.parentElement.remove();
+			if (
+				deleteButton.parentElement.parentElement.parentElement == toDo.container
+			) {
+				deleteEvent(deleteButton, toDoEventCounter, event, toDo, 'todo');
+			} else if (
+				deleteButton.parentElement.parentElement.parentElement ==
+				appointment.container
+			) {
+				deleteEvent(
+					deleteButton,
+					appointmentEventCounter,
+					event,
+					appointment,
+					'appointments'
+				);
+			} else if (
+				deleteButton.parentElement.parentElement.parentElement ==
+				other.container
+			) {
+				deleteEvent(deleteButton, otherEventCounter, event, other, 'other');
+			} else if (
+				deleteButton.parentElement.parentElement.parentElement == note.container
+			) {
+				deleteEvent(deleteButton, noteEventCounter, event, note, 'notes');
+			} else if (
+				deleteButton.parentElement.parentElement.parentElement ==
+				completedItemsContainer
+			) {
+				deleteButton.parentElement.parentElement.remove();
+				removeFromLocalStorage('completedItems', 0);
+			}
 		});
 
 		const timeStampDiv = document.createElement('div');
@@ -288,6 +348,33 @@ const loadFromLocalStorage = (key) => {
 
 	return parsedData.map(createEventNode);
 };
+
+function removeFromLocalStorage(key, position) {
+	// Get the data from localStorage
+	let data = localStorage.getItem(key);
+
+	// Check if the data exists
+	if (data) {
+		let parsedData = JSON.parse(data); // Parse the JSON string
+
+		// Ensure the position is valid
+		if (position >= 0 && position < parsedData.length) {
+			parsedData.splice(position, 1); // Remove the object at the specified position
+
+			if (parsedData.length === 0) {
+				// If the array is empty, remove the key from localStorage
+				localStorage.removeItem(key);
+			} else {
+				// Otherwise, update the localStorage with the modified array
+				localStorage.setItem(key, JSON.stringify(parsedData));
+			}
+		} else {
+			console.error('Invalid position: Out of bounds');
+		}
+	} else {
+		console.error('No data found for the key:', key);
+	}
+}
 
 function totalEventCount() {
 	return (
@@ -304,7 +391,7 @@ const deleteEvent = (toggler, parent, item, obj, key) => {
 		parent.pop(item);
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-		localStorage.removeItem(key);
+		removeFromLocalStorage(key, 0);
 	});
 };
 
@@ -316,7 +403,7 @@ const completeEvent = (toggler, parent, item, obj, key) => {
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 		completedParent.push(item);
-		localStorage.removeItem(key);
+		removeFromLocalStorage(key, 0);
 		saveToLocalStorage('completedItems', completedParent);
 		console.log(completedParent);
 	});
