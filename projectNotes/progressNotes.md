@@ -19,10 +19,13 @@
 --work mobile responsive
 --create a mobile menu for responsive
 
---Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)
+<!----Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)-->
 
 --remove from local storage function
---save to local storage function for the completed items container
+-- work remvoe from local storage from completed items container before refresh
+
+<!----save to local storage function for the completed items container-->
+
 --updae counters on local storage function()
 
 --delete all notebox classes and fucntion(conveted noted in to generateEvnts)
