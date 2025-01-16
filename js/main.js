@@ -650,6 +650,3 @@ for (let key of storageKeys) {
 		);
 	}
 }
-
-//loadEvents.forEach((eventNode) => appendChild(appointmentContainer, eventNode));
-//otherEvents.forEach((eventNode) => appendChild(otherContainer, eventNode));

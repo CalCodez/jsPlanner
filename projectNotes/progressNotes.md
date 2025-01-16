@@ -14,19 +14,21 @@
    <!--CSS: create an active class that toggles on the target container to 100% on click;-->
    <!--JS: apply flexInActive on other containers on click-->
 <!----create a felx container to hold completed events (function)-->
+<!----Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)-->
+<!----remove from local storage function-->
+<!---- work remvoe from local storage from completed items container before refresh-->
+<!----save to local storage function for the completed items container-->
+
+--update the crate eventform (remove the note form and buttons)
+
+1. remove Create Event, note, cancele Button
+2. Remove entire Create Options container. buttons and fucntion
+3. Remove all note form buttons and functions
 
 --(reworkd and add animations)style/theme needs attetnion
 --work mobile responsive
 --create a mobile menu for responsive
 
-<!----Wrok on local storage function to protect from refresh(needs to hold the values and parent containers, needs to work for the complted items container as well)-->
-
---remove from local storage function
--- work remvoe from local storage from completed items container before refresh
-
-<!----save to local storage function for the completed items container-->
-
---updae counters on local storage function()
-
 --delete all notebox classes and fucntion(conveted noted in to generateEvnts)
---update the crate eventform (remove the note form and buttons)
+
+<!--**updae counters on local storage function()-->
