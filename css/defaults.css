@@ -88,6 +88,34 @@ body {
 .toggle-buttons:hover {
 	transform: scale(1.1);
 }
+#mobile-menu-toggler {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 99;
+	font-size: 1.5rem;
+	visibility: hidden;
+}
+
+.mobile-menu-container {
+	width: 200px;
+	height: 300px;
+	border: 2px outset var(--red-dark);
+	position: absolute;
+	z-index: 50;
+	background-color: var(--black);
+	right: 0;
+	margin-top: 170px;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 5px;
+	display: none;
+}
+
+.mobile-menu-container span {
+	width: 100px;
+	height: 30px;
+}
 
 .create-form-container {
 	position: absolute;

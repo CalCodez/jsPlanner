@@ -23,6 +23,34 @@ function generateTimeStampString() {
 	return formattedString;
 }
 
+//Mobile Menu vars and function
+
+const mobileMenuToggler = getById('mobile-menu-toggler');
+const mobileMenuContainer = getById('mobile-menu-container');
+
+mobileMenuToggler.addEventListener(click, function () {
+	if (!mobileMenuContainer.classList.contains(flexActive)) {
+		toggleClass(mobileMenuContainer, flexActive);
+	} else {
+		toggleClass(mobileMenuContainer, flexActive);
+	}
+
+	mobileMenuContainer.addEventListener('click', function () {
+		if (mobileMenuContainer.classList.contains(flexActive)) {
+			toggleClass(mobileMenuContainer, flexActive);
+		}
+	});
+
+	document.addEventListener(keyup, function (event) {
+		if (
+			event.key == 'Escape' &&
+			mobileMenuContainer.classList.contains(flexActive)
+		) {
+			toggleClass(mobileMenuContainer, flexActive);
+		}
+	});
+});
+
 const dateDisplay = getById('date-container');
 
 dateDisplay.innerText = generateTimeStampString();
@@ -101,14 +129,7 @@ const toggleCreateEvent = (array) => {
 toggleCreateEvent(eventFormTogglers);
 
 //``Collect Each event holder parent container Ids and sote in Array.from
-//const toDoContainer = getById('toDo-parent-container');
-//const otherContainer = getById('other-parent-container');
-//const appointmentContainer = getById('appointment-parent-container');
-//const noteContainer = getById('note-parent-container');
 
-//const toDoParent = Array.from(getById('toDo-parent-container'));
-//const otherParent = Array.from(getById('other-parent-container'));
-//const noteParent = Array.from(getById('note-parent-container'));
 const completedParent = Array.from(getById('completed-items-container'));
 
 // Event Counters
@@ -290,24 +311,21 @@ const loadFromLocalStorage = (key) => {
 		const timeStampDiv = document.createElement('div');
 		timeStampDiv.classList.add(generateEvent.timeStamp.containerClass);
 		addClass(timeStampDiv, generateEvent.timeStamp.containerClass);
-
 		timeStampDiv.textContent = event.timeStamp;
 		eventNode.appendChild(timeStampDiv);
-
 		return eventNode;
 	};
 
 	return parsedData.map(createEventNode);
 };
 
+//CODE: Study this local storage function
 function removeFromLocalStorage(key, position) {
 	// Get the data from localStorage
 	let data = localStorage.getItem(key);
-
 	// Check if the data exists
 	if (data) {
 		let parsedData = JSON.parse(data); // Parse the JSON string
-
 		// Ensure the position is valid
 		if (position >= 0 && position < parsedData.length) {
 			parsedData.splice(position, 1); // Remove the object at the specified position
@@ -435,6 +453,8 @@ eventGeneratorButton.addEventListener(click, function () {
 	const clonedEvent = event.cloneNode(true);
 	const eventData = extractEventData(clonedEvent);
 
+	//NOTE:CODE: Refactor this if statement to an arrow function using this obj.value to reduce this code
+
 	if (generateEvent.type.formInput.value == 'To Do') {
 		appendChild(toDo.container, event);
 		toDoEventCounter.push(eventData);
@@ -480,7 +500,7 @@ eventGeneratorButton.addEventListener(click, function () {
 		deleteEvent(deleteButton, otherEventCounter, event, other, other.name);
 	} else if (generateEvent.type.formInput.value == 'Note') {
 		noteEventCounter.push(eventData);
-		saveToLocalStorage('notes', noteEventCounter);
+		saveToLocalStorage(note.name, noteEventCounter);
 
 		textContent(note.counter, `Notes: ${noteEventCounter.length}`);
 		completeEvent(completeButton, noteEventCounter, eventData, note, note.name);
@@ -488,7 +508,7 @@ eventGeneratorButton.addEventListener(click, function () {
 
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 
-		appendChild(noteContainer, eventBox);
+		appendChild(note.container, eventBox);
 	}
 
 	textContent(totalEventCounter, `Total: ${totalEventCount()}`);
@@ -497,16 +517,35 @@ eventGeneratorButton.addEventListener(click, function () {
 
 //``Toggle Event Holder Containers Var and Function
 const holderToggles = getByClass('holder-toggle');
-const [todoToggle, appointmentToggle, otherToggle, noteToggle] = holderToggles;
+console.log(holderToggles);
+const [
+	todoToggle,
+	appointmentToggle,
+	otherToggle,
+	noteToggle,
+	toDoButton,
+	appointmentButton,
+	otherButton,
+	noteButton,
+] = holderToggles;
 
 const eventHolders = {
-	todoHolder: { toggle: todoToggle, holder: getById('toDo-event-holder') },
+	todoHolder: {
+		toggle: [todoToggle, toDoButton],
+		holder: getById('toDo-event-holder'),
+	},
 	appointmentHolder: {
-		toggle: appointmentToggle,
+		toggle: [appointmentToggle, appointmentButton],
 		holder: getById('appointment-event-holder'),
 	},
-	otherHolder: { toggle: otherToggle, holder: getById('other-event-holder') },
-	noteHolder: { toggle: noteToggle, holder: getById('note-event-holder') },
+	otherHolder: {
+		toggle: [otherToggle, otherButton],
+		holder: getById('other-event-holder'),
+	},
+	noteHolder: {
+		toggle: [noteToggle, noteButton],
+		holder: getById('note-event-holder'),
+	},
 };
 
 const { todoHolder, appointmentHolder, otherHolder, noteHolder } = eventHolders;
@@ -514,54 +553,56 @@ const { todoHolder, appointmentHolder, otherHolder, noteHolder } = eventHolders;
 const toggleEventHolders = (object1, object2, object3, object4) => {
 	const holderToggled = 'holder-toggled';
 
-	object1.toggle.addEventListener(click, function () {
-		if (
-			!object1.holder.classList.contains(holderToggled) &&
-			!object2.holder.classList.contains(holderToggled) &&
-			!object3.holder.classList.contains(holderToggled) &&
-			!object4.holder.classList.contains(holderToggled)
-		) {
-			toggleClass(object1.holder, holderToggled);
-			toggleClass(object2.holder, flexInactive);
-			toggleClass(object3.holder, flexInactive);
-			toggleClass(object4.holder, flexInactive);
-		} else if (
-			object1.holder.classList.contains(flexInactive) &&
-			object2.holder.classList.contains(holderToggled) &&
-			object3.holder.classList.contains(flexInactive) &&
-			object4.holder.classList.contains(flexInactive)
-		) {
-			removeClass(object1.holder, flexInactive);
-			addClass(object1.holder, holderToggled);
-			removeClass(object2.holder, holderToggled);
-			addClass(object2.holder, flexInactive);
-		} else if (
-			object1.holder.classList.contains(flexInactive) &&
-			object2.holder.classList.contains(flexInactive) &&
-			object3.holder.classList.contains(holderToggled) &&
-			object4.holder.classList.contains(flexInactive)
-		) {
-			removeClass(object1.holder, flexInactive);
-			addClass(object1.holder, holderToggled);
-			removeClass(object3.holder, holderToggled);
-			addClass(object3.holder, flexInactive);
-		} else if (
-			object1.holder.classList.contains(flexInactive) &&
-			object2.holder.classList.contains(flexInactive) &&
-			object3.holder.classList.contains(flexInactive) &&
-			object4.holder.classList.contains(holderToggled)
-		) {
-			removeClass(object1.holder, flexInactive);
-			addClass(object1.holder, holderToggled);
-			removeClass(object4.holder, holderToggled);
-			addClass(object4.holder, flexInactive);
-		} else {
-			toggleClass(object1.holder, holderToggled);
-			removeClass(object2.holder, flexInactive);
-			removeClass(object3.holder, flexInactive);
-			removeClass(object4.holder, flexInactive);
-		}
-	});
+	for (let toggler of object1.toggle) {
+		toggler.addEventListener(click, function () {
+			if (
+				!object1.holder.classList.contains(holderToggled) &&
+				!object2.holder.classList.contains(holderToggled) &&
+				!object3.holder.classList.contains(holderToggled) &&
+				!object4.holder.classList.contains(holderToggled)
+			) {
+				toggleClass(object1.holder, holderToggled);
+				toggleClass(object2.holder, flexInactive);
+				toggleClass(object3.holder, flexInactive);
+				toggleClass(object4.holder, flexInactive);
+			} else if (
+				object1.holder.classList.contains(flexInactive) &&
+				object2.holder.classList.contains(holderToggled) &&
+				object3.holder.classList.contains(flexInactive) &&
+				object4.holder.classList.contains(flexInactive)
+			) {
+				removeClass(object1.holder, flexInactive);
+				addClass(object1.holder, holderToggled);
+				removeClass(object2.holder, holderToggled);
+				addClass(object2.holder, flexInactive);
+			} else if (
+				object1.holder.classList.contains(flexInactive) &&
+				object2.holder.classList.contains(flexInactive) &&
+				object3.holder.classList.contains(holderToggled) &&
+				object4.holder.classList.contains(flexInactive)
+			) {
+				removeClass(object1.holder, flexInactive);
+				addClass(object1.holder, holderToggled);
+				removeClass(object3.holder, holderToggled);
+				addClass(object3.holder, flexInactive);
+			} else if (
+				object1.holder.classList.contains(flexInactive) &&
+				object2.holder.classList.contains(flexInactive) &&
+				object3.holder.classList.contains(flexInactive) &&
+				object4.holder.classList.contains(holderToggled)
+			) {
+				removeClass(object1.holder, flexInactive);
+				addClass(object1.holder, holderToggled);
+				removeClass(object4.holder, holderToggled);
+				addClass(object4.holder, flexInactive);
+			} else {
+				toggleClass(object1.holder, holderToggled);
+				removeClass(object2.holder, flexInactive);
+				removeClass(object3.holder, flexInactive);
+				removeClass(object4.holder, flexInactive);
+			}
+		});
+	}
 };
 
 toggleEventHolders(todoHolder, appointmentHolder, otherHolder, noteHolder);

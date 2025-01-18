@@ -19,16 +19,19 @@
 <!---- work remvoe from local storage from completed items container before refresh-->
 <!----save to local storage function for the completed items container-->
 
---update the crate eventform (remove the note form and buttons)
+<!----update the crate eventform (remove the note form and buttons)-->
 
-1. remove Create Event, note, cancele Button
-2. Remove entire Create Options container. buttons and fucntion
-3. Remove all note form buttons and functions
+<!--1. remove Create Event, note, cancele Button-->
+<!--2. Remove entire Create Options container. buttons and fucntion-->
+<!--3. Remove all note form buttons and functions-->
+<!----create a mobile menu for responsive-->
+<!----delete all notebox classes and fucntion(conveted noted in to generateEvnts)-->
 
---(reworkd and add animations)style/theme needs attetnion
+--(reworkd and add animations)style/theme needs attention
 --work mobile responsive
---create a mobile menu for responsive
+--mobile-menu styles (container and buttons)
 
---delete all notebox classes and fucntion(conveted noted in to generateEvnts)
+--css clean up
+--js refractor clear up CODE: placements in the js files
 
 <!--**updae counters on local storage function()-->
