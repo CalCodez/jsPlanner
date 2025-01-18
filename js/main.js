@@ -69,33 +69,37 @@ toggleCompletedEventsContainer();
 
 //``Toggle Event Form Var and Function
 const eventFormTogglers = getByClass('create-event-togglers');
-const cancelCrateButton = getById('cancel-create-button');
+const cancelFormButton = getById('cancel-form-button');
 const eventFormContainer = getById('create-event-container');
 
-for (let toggles of eventFormTogglers) {
-	toggles.addEventListener(click, function () {
-		if (!eventFormContainer.classList.contains(flexActive)) {
-			toggleClass(eventFormContainer, flexActive);
-		} else if (!eventFormContainer.classList.contains(flexActive)) {
-			toggleClass(eventFormContainer, flexActive);
-		}
-	});
+console.log(cancelFormButton);
 
-	cancelCrateButton.addEventListener(click, function () {
-		if (eventFormContainer.classList.contains(flexActive)) {
-			toggleClass(eventFormContainer, flexActive);
-		}
+const toggleCreateEvent = (array) => {
+	for (let toggles of array) {
+		toggles.addEventListener(click, function () {
+			if (!eventFormContainer.classList.contains(flexActive)) {
+				toggleClass(eventFormContainer, flexActive);
+			} else {
+				toggleClass(eventFormContainer, flexActive);
+			}
+		});
+	}
+
+	cancelFormButton.addEventListener(click, function () {
+		toggleClass(eventFormContainer, flexActive);
 	});
 
 	document.addEventListener(keyup, function (event) {
 		if (
-			event.key === 'Escape' &&
+			event.key == 'Escape' &&
 			eventFormContainer.classList.contains(flexActive)
 		) {
 			toggleClass(eventFormContainer, flexActive);
 		}
 	});
-}
+};
+
+toggleCreateEvent(eventFormTogglers);
 
 //``Toggle Event And Note Form Var and Function
 const formOptionsContainer = getById('form-options-container');
@@ -114,41 +118,41 @@ const formsArray = {
 
 const { eventForm, noteForm } = formsArray;
 
-const toggleForms = (
-	object1,
-	object2,
-	optionsContainer = formOptionsContainer
-) => {
-	object1.toggler.addEventListener(click, function () {
-		if (
-			!object1.form.classList.contains(flexActive) &&
-			!object2.form.classList.contains(flexActive)
-		) {
-			toggleClass(object1.form, flexActive);
-			toggleClass(optionsContainer, flexInactive);
-		}
+//const toggleForms = (
+//	object1,
+//	object2,
+//	optionsContainer = formOptionsContainer
+//) => {
+//	object1.toggler.addEventListener(click, function () {
+//		if (
+//			!object1.form.classList.contains(flexActive) &&
+//			!object2.form.classList.contains(flexActive)
+//		) {
+//			toggleClass(object1.form, flexActive);
+//			toggleClass(optionsContainer, flexInactive);
+//		}
 
-		object1.backButton.addEventListener(click, function () {
-			while (object1.form.classList.contains(flexActive)) {
-				toggleClass(object1.form, flexActive);
-				toggleClass(optionsContainer, flexInactive);
-			}
-		});
-	});
+//		object1.backButton.addEventListener(click, function () {
+//			while (object1.form.classList.contains(flexActive)) {
+//				toggleClass(object1.form, flexActive);
+//				toggleClass(optionsContainer, flexInactive);
+//			}
+//		});
+//	});
 
-	const cancelFormButtons = getByClass('cancel-form-buttons');
-	for (let cancelForm of cancelFormButtons) {
-		cancelForm.addEventListener(click, function () {
-			while (object1.form.classList.contains(flexActive)) {
-				toggleClass(object1.form, flexActive);
-				toggleClass(optionsContainer, flexInactive);
-				toggleClass(eventFormContainer, flexActive);
-			}
-		});
-	}
-};
-toggleForms(eventForm, noteForm);
-toggleForms(noteForm, eventForm);
+//	const cancelFormButtons = getByClass('cancel-form-buttons');
+//	for (let cancelForm of cancelFormButtons) {
+//		cancelForm.addEventListener(click, function () {
+//			while (object1.form.classList.contains(flexActive)) {
+//				toggleClass(object1.form, flexActive);
+//				toggleClass(optionsContainer, flexInactive);
+//				toggleClass(eventFormContainer, flexActive);
+//			}
+//		});
+//	}
+//};
+//toggleForms(eventForm, noteForm);
+//toggleForms(noteForm, eventForm);
 
 //``Collect Each event holder parent container Ids and sote in Array.from
 const toDoContainer = getById('toDo-parent-container');

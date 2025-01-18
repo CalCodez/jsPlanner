@@ -33,7 +33,6 @@
 
       <div class="container status-bar">
         <div id="total-event-count" class="container">
-          Total: 0
         </div>
         <div id="to-do-count" class="container">
           To Do: 0
@@ -119,57 +118,32 @@
 
 
     <!-- ??Create Event Form -->
-    <div id="create-event-container" class="create-form-container container">
+    <div id="create-event-container" class="create-form-container container ">
 
-      <div id="form-options-container" class="form-options-container container">
-        <div class="form-option-title-container">
-          <h2>Create Options</h2>
+      <div id="event-form" class="event-form container">
+        <h2>Create Event</h2>
+        <select class="form-input" name="event-type" id="event-type">
+          <option id="first-select">Select Event Type</option>
+          <option id="to-do-select">To Do</option>
+          <option id="reminder-select">Appointment</option>
+          <option id="note-select">Note</option>
+          <option id="note-select">Other</option>
+        </select>
+
+        <input type="text" class="form-input" name="event-title" id="event-title" placeholder="Enter Title">
+        <label for="event-title">Event-Title</label>
+        <input type="date" class="form-input" name="event-date" id="event-date" placeholder="Event Title">
+        <label for="event-date">Date</label>
+        <textarea class="event-form-description-input" name="event-description" id="event-description"
+          placeholder="Enter Description"></textarea>
+        <label for="event-description">Description</label>
+        <div class="event-form-button-container container">
+          <button class="toggle-buttons" id="generate-event-btn">Generate</button>
+          <button class="toggle-buttons" id="back-event-btn">Back</button>
+
+          <button id="cancel-form-button" class="toggle-buttons ">Cancel</button>
+
         </div>
-        <button id="toggle-create-event" class="toggle-buttons">Create An Event</button>
-        <button id="toggle-create-note" class="toggle-buttons">Create A Note</button>
-        <button id="cancel-create-button" class="toggle-buttons">Cancel</button>
-      </div>
-      <div class="form-holder-container container">
-        <!-- ``Event From -->
-        <div id="event-form" class="event-form container">
-          <h2>Create Event</h2>
-          <select class="form-input" name="event-type" id="event-type">
-            <option id="first-select">Select Event Type</option>
-            <option id="to-do-select">To Do</option>
-            <option id="reminder-select">Appointment</option>
-            <option id="note-select">Note</option>
-            <option id="note-select">Other</option>
-          </select>
-
-          <input type="text" class="form-input" name="event-title" id="event-title" placeholder="Enter Title">
-          <label for="event-title">Event-Title</label>
-          <input type="date" class="form-input" name="event-date" id="event-date" placeholder="Event Title">
-          <label for="event-date">Date</label>
-          <textarea class="event-form-description-input" name="event-description" id="event-description"
-            placeholder="Enter Description"></textarea>
-          <label for="event-description">Description</label>
-          <div class="event-form-button-container container">
-            <button class="toggle-buttons" id="generate-event-btn">Generate</button>
-            <button class="toggle-buttons" id="back-event-btn">Back</button>
-
-            <button class="toggle-buttons cancel-form-buttons">Cancel</button>
-
-          </div>
-        </div>
-        <!-- ``Note Form -->
-        <div id="note-form" class="note-form container">
-          <h2>Create A Note</h2>
-          <textarea name="note-description" id="note-description" placeholder="Write A Note"></textarea>
-
-          <label for="event-description">Note</label>
-          <div class="event-form-button-container container">
-            <button class="toggle-buttons" id="generate-note-btn">Generate</button>
-            <button class="toggle-buttons" id="back-note-btn">Back</button>
-            <button class="toggle-buttons cancel-form-buttons">Cancel</button>
-
-          </div>
-        </div>
-        </d1iv>
       </div>
 
 
