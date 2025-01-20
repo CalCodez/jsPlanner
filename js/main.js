@@ -139,23 +139,27 @@ const parentEventCounter = {
 		name: 'To Do',
 		container: getById('toDo-parent-container'),
 		counter: getById('to-do-count'),
+		eventCounter: Array.from(getById('toDo-parent-container')),
 	},
 	appointment: {
 		name: 'Appointments',
 		container: getById('appointment-parent-container'),
 		counter: getById('appointment-count'),
+		eventCounter: Array.from(getById('appointment-parent-container')),
 	},
 
 	other: {
 		name: 'Other',
 		container: getById('other-parent-container'),
 		counter: getById('other-count'),
+		eventCounter: Array.from(getById('other-parent-container')),
 	},
 
 	note: {
 		name: 'Notes',
 		container: getById('note-parent-container'),
 		counter: getById('note-count'),
+		eventCounter: Array.from(getById('note-parent-container')),
 	},
 };
 
@@ -347,25 +351,51 @@ function removeFromLocalStorage(key, position) {
 
 function totalEventCount() {
 	return (
-		toDoEventCounter.length +
-		appointmentEventCounter.length +
-		otherEventCounter.length +
-		noteEventCounter.length
+		toDo.eventCounter.length +
+		appointment.eventCounter.length +
+		other.eventCounter.length +
+		note.eventCounter.length
 	);
 }
 
-const deleteEvent = (toggler, parent, item, obj, key) => {
+const appendEvent = (obj, container, data, button1, button2) => {
+	appendChild(obj.container, container);
+	obj.eventCounter.push(data);
+	textContent(obj.counter, `${obj.name}: ${obj.eventCounter.length}`);
+	saveToLocalStorage(obj.name, obj.eventCounter);
+	button1.addEventListener(click, function () {
+		button1.parentElement.parentElement.remove();
+		appendChild(completedItemsContainer, button1.parentElement.parentElement);
+		obj.eventCounter.pop(data);
+		textContent(obj.counter, `${obj.name}: ${obj.counter.length}`);
+		textContent(totalEventCount, `Total: ${totalEventCount()}`);
+		completedParent.push(data);
+		removeFromLocalStorage(obj.name, 0);
+		saveToLocalStorage('completedItems', completedParent);
+	});
+
+	button2.addEventListener(click, function () {
+		button2.parentElement.parentElement.remove();
+		obj.eventCounter.pop(data);
+		textContent(obj.counter, `${obj.name}: ${obj.counter.length}`);
+		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
+		removeFromLocalStorage(obj.name, 0);
+		removeFromLocalStorage('completedItems', 0);
+	});
+};
+
+const deleteEvent = (toggler, parent, item, obj) => {
 	toggler.addEventListener(click, function () {
 		toggler.parentElement.parentElement.remove();
 		parent.pop(item);
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-		removeFromLocalStorage(key, 0);
+		removeFromLocalStorage(obj.name, 0);
 		removeFromLocalStorage('completedItems', 0);
 	});
 };
 
-const completeEvent = (toggler, parent, item, obj, key) => {
+const completeEvent = (toggler, parent, item, obj) => {
 	toggler.addEventListener(click, function () {
 		toggler.parentElement.parentElement.remove();
 		appendChild(completedItemsContainer, toggler.parentElement.parentElement);
@@ -373,9 +403,8 @@ const completeEvent = (toggler, parent, item, obj, key) => {
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
 		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 		completedParent.push(item);
-		removeFromLocalStorage(key, 0);
+		removeFromLocalStorage(obj.name, 0);
 		saveToLocalStorage('completedItems', completedParent);
-		console.log(completedParent);
 	});
 };
 
@@ -456,59 +485,13 @@ eventGeneratorButton.addEventListener(click, function () {
 	//NOTE:CODE: Refactor this if statement to an arrow function using this obj.value to reduce this code
 
 	if (generateEvent.type.formInput.value == 'To Do') {
-		appendChild(toDo.container, event);
-		toDoEventCounter.push(eventData);
-		textContent(toDo.counter, `To Do: ${toDoEventCounter.length}`);
-		saveToLocalStorage(toDo.name, toDoEventCounter);
-		completeEvent(completeButton, toDoEventCounter, eventData, toDo, toDo.name);
-		deleteEvent(deleteButton, toDoEventCounter, event, toDo, toDo.name);
+		appendEvent(toDo, event, eventData, completeButton, deleteButton);
 	} else if (generateEvent.type.formInput.value == 'Appointment') {
-		appendChild(appointment.container, event);
-		appointmentEventCounter.push(eventData);
-		textContent(
-			appointment.counter,
-			`Appointments: ${appointmentEventCounter.length}`
-		);
-		saveToLocalStorage(appointment.name, appointmentEventCounter);
-		completeEvent(
-			completeButton,
-			appointmentEventCounter,
-			eventData,
-			appointment,
-			appointment.name
-		);
-
-		deleteEvent(
-			deleteButton,
-			appointmentEventCounter,
-			eventData,
-			appointment,
-			appointment.name
-		);
+		appendEvent(appointment, event, eventData, completeButton, deleteButton);
 	} else if (generateEvent.type.formInput.value == 'Other') {
-		appendChild(other.container, event);
-		otherEventCounter.push(eventData);
-		saveToLocalStorage('other', otherEventCounter);
-		textContent(other.counter, `Other: ${otherEventCounter.length}`);
-		completeEvent(
-			completeButton,
-			otherEventCounter,
-			eventData,
-			other,
-			other.name
-		);
-		deleteEvent(deleteButton, otherEventCounter, event, other, other.name);
+		appendEvent(other, event, eventData, completeButton, deleteButton);
 	} else if (generateEvent.type.formInput.value == 'Note') {
-		noteEventCounter.push(eventData);
-		saveToLocalStorage(note.name, noteEventCounter);
-
-		textContent(note.counter, `Notes: ${noteEventCounter.length}`);
-		completeEvent(completeButton, noteEventCounter, eventData, note, note.name);
-		deleteEvent(deleteButton, noteEventCounter, event, note, note.name);
-
-		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-
-		appendChild(note.container, eventBox);
+		appendEvent(note, event, eventData, completeButton, deleteButton);
 	}
 
 	textContent(totalEventCounter, `Total: ${totalEventCount()}`);

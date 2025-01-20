@@ -71,3 +71,11 @@ const loadFromLocalStorage = (key) => {
 	};
 	return parsedData.map(createEventNode);
 };
+
+const appendEvent = (obj, data, button1, button2) => {
+	appendChild(obj.container, data);
+	obj.eventCounter.push(data);
+	textContent(obj.counter, `${obj.name}: ${obj.eventCounter.length}`);
+	completeEvent(button1, obj.container, data, obj);
+	deleteEvent(button2.obj.container, data, obj);
+};
