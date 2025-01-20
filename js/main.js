@@ -353,13 +353,19 @@ function totalEventCount() {
 	);
 }
 
-const appendEvent = (obj, container, data, button1, button2) => {
-	appendChild(obj.container, container);
-	obj.eventCounter.push(data);
-	textContent(obj.counter, `${obj.name}: ${obj.eventCounter.length}`);
-	saveToLocalStorage(obj.name, obj.eventCounter);
-	completeEvent(button1, obj.eventCounter, data, obj);
-	deleteEvent(button2, obj.eventCounter, data, obj);
+const buildEventBox = (array, obj) => {
+	addClass(array[0], obj.eventBox);
+	addClass(array[1], obj.type.containerClass);
+	addClass(array[2], obj.title.containerClass);
+	addClass(array[3], obj.date.containerClass);
+	addClass(array[4], obj.description.containerClass);
+	addClass(array[5], obj.button.containerClass);
+	addClass(array[6], obj.timeStamp.containerClass);
+	textContent(array[1], obj.type.formInput.value);
+	textContent(array[2], obj.title.formInput.value);
+	textContent(array[3], obj.date.formInput.value);
+	textContent(array[4], obj.description.formInput.value);
+	textContent(array[6], generateTimeStampString());
 };
 
 const completeEvent = (toggler, parent, item, obj) => {
@@ -384,6 +390,15 @@ const deleteEvent = (toggler, parent, item, obj) => {
 		removeFromLocalStorage(obj.name, 0);
 		removeFromLocalStorage('completedItems', 0);
 	});
+};
+
+const appendEvent = (obj, container, data, button1, button2) => {
+	appendChild(obj.container, container);
+	obj.eventCounter.push(data);
+	textContent(obj.counter, `${obj.name}: ${obj.eventCounter.length}`);
+	saveToLocalStorage(obj.name, obj.eventCounter);
+	completeEvent(button1, obj.eventCounter, data, obj);
+	deleteEvent(button2, obj.eventCounter, data, obj);
 };
 
 const generateEvent = {
@@ -417,21 +432,6 @@ const generateEvent = {
 
 //Generate An Event Function
 const eventGeneratorButton = getById('generate-event-btn');
-
-const buildEventBox = (array, obj) => {
-	addClass(array[0], obj.eventBox);
-	addClass(array[1], obj.type.containerClass);
-	addClass(array[2], obj.title.containerClass);
-	addClass(array[3], obj.date.containerClass);
-	addClass(array[4], obj.description.containerClass);
-	addClass(array[5], obj.button.containerClass);
-	addClass(array[6], obj.timeStamp.containerClass);
-	textContent(array[1], obj.type.formInput.value);
-	textContent(array[2], obj.title.formInput.value);
-	textContent(array[3], obj.date.formInput.value);
-	textContent(array[4], obj.description.formInput.value);
-	textContent(array[6], generateTimeStampString());
-};
 
 eventGeneratorButton.addEventListener(click, function () {
 	let eventContainers = [];
