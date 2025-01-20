@@ -475,7 +475,6 @@ eventGeneratorButton.addEventListener(click, function () {
 
 //``Toggle Event Holder Containers Var and Function
 const holderToggles = getByClass('holder-toggle');
-console.log(holderToggles);
 const [
 	todoToggle,
 	appointmentToggle,
@@ -582,7 +581,6 @@ for (let key of storageKeys) {
 			appendChild(toDo.container, eventNode)
 		);
 		textContent(toDo.counter, `To Do: ${toDo.container.childElementCount}`);
-		console.log(toDo.container.childElementCount);
 	} else if (key == appointment.name) {
 		loadFromLocalStorage(appointment.name).forEach((eventNode) =>
 			appendChild(appointment.container, eventNode)
