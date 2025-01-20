@@ -24,10 +24,8 @@ function generateTimeStampString() {
 }
 
 //Mobile Menu vars and function
-
 const mobileMenuToggler = getById('mobile-menu-toggler');
 const mobileMenuContainer = getById('mobile-menu-container');
-
 mobileMenuToggler.addEventListener(click, function () {
 	if (!mobileMenuContainer.classList.contains(flexActive)) {
 		toggleClass(mobileMenuContainer, flexActive);
@@ -99,9 +97,6 @@ toggleCompletedEventsContainer();
 const eventFormTogglers = getByClass('create-event-togglers');
 const cancelFormButton = getById('cancel-form-button');
 const eventFormContainer = getById('create-event-container');
-
-console.log(cancelFormButton);
-
 const toggleCreateEvent = (array) => {
 	for (let toggles of array) {
 		toggles.addEventListener(click, function () {
@@ -125,14 +120,11 @@ const toggleCreateEvent = (array) => {
 		}
 	});
 };
-
 toggleCreateEvent(eventFormTogglers);
 
 //``Collect Each event holder parent container Ids and sote in Array.from
-
 const completedParent = Array.from(getById('completed-items-container'));
-
-// Event Counters
+const totalEventCounter = getById('total-event-count');
 
 const parentEventCounter = {
 	toDo: {
@@ -162,16 +154,7 @@ const parentEventCounter = {
 		eventCounter: Array.from(getById('note-parent-container')),
 	},
 };
-
 const { toDo, appointment, other, note } = parentEventCounter;
-
-const totalEventCounter = getById('total-event-count');
-const toDoEventCounter = Array.from(parentEventCounter.toDo.container);
-const appointmentEventCounter = Array.from(
-	parentEventCounter.appointment.container
-);
-const otherEventCounter = Array.from(parentEventCounter.other.container);
-const noteEventCounter = Array.from(parentEventCounter.note.container);
 
 const saveToLocalStorage = (key, array) => {
 	localStorage.setItem(key, JSON.stringify(array));
@@ -247,14 +230,20 @@ const loadFromLocalStorage = (key) => {
 				completeButton.parentElement.parentElement.parentElement ==
 				toDo.container
 			) {
-				completeEvent(completeButton, toDoEventCounter, event, toDo, toDo.name);
+				completeEvent(
+					completeButton,
+					toDo.eventCounter,
+					event,
+					toDo,
+					toDo.name
+				);
 			} else if (
 				completeButton.parentElement.parentElement.parentElement ==
 				appointment.container
 			) {
 				completeEvent(
 					completeButton,
-					appointmentEventCounter,
+					appointment.eventCounter,
 					event,
 					appointment,
 					appointment.name
@@ -265,8 +254,8 @@ const loadFromLocalStorage = (key) => {
 			) {
 				completeEvent(
 					completeButton,
-					otherEventCounter,
-					eventData,
+					other.eventCounter,
+					event,
 					other,
 					other.name
 				);
@@ -274,7 +263,13 @@ const loadFromLocalStorage = (key) => {
 				completeButton.parentElement.parentElement.parentElement ==
 				note.container
 			) {
-				completeEvent(completeButton, noteEventCounter, event, note, note.name);
+				completeEvent(
+					completeButton,
+					note.eventCounter,
+					event,
+					note,
+					note.name
+				);
 			}
 		});
 
@@ -282,14 +277,14 @@ const loadFromLocalStorage = (key) => {
 			if (
 				deleteButton.parentElement.parentElement.parentElement == toDo.container
 			) {
-				deleteEvent(deleteButton, toDoEventCounter, event, toDo, toDo.name);
+				deleteEvent(deleteButton, toDo.eventCounter, event, toDo, toDo.name);
 			} else if (
 				deleteButton.parentElement.parentElement.parentElement ==
 				appointment.container
 			) {
 				deleteEvent(
 					deleteButton,
-					appointmentEventCounter,
+					appointment.eventCounter,
 					event,
 					appointment,
 					appointment.name
@@ -298,11 +293,11 @@ const loadFromLocalStorage = (key) => {
 				deleteButton.parentElement.parentElement.parentElement ==
 				other.container
 			) {
-				deleteEvent(deleteButton, otherEventCounter, event, other, other.name);
+				deleteEvent(deleteButton, other.eventCounter, event, other, other.name);
 			} else if (
 				deleteButton.parentElement.parentElement.parentElement == note.container
 			) {
-				deleteEvent(deleteButton, noteEventCounter, event, note, note.name);
+				deleteEvent(deleteButton, note.eventCounter, event, note, note.name);
 			} else if (
 				deleteButton.parentElement.parentElement.parentElement ==
 				completedItemsContainer
@@ -461,8 +456,10 @@ eventGeneratorButton.addEventListener(click, function () {
 	const [completeButton, deleteButton] = eventBoxButtons;
 	textContent(completeButton, generateEvent.button.completeText);
 	textContent(deleteButton, generateEvent.button.deleteText);
+
 	const clonedEvent = eventBox.cloneNode(true);
 	const eventData = extractEventData(clonedEvent);
+
 	if (generateEvent.type.formInput.value == 'To Do') {
 		appendEvent(toDo, eventBox, eventData, completeButton, deleteButton);
 	} else if (generateEvent.type.formInput.value == 'Appointment') {
@@ -584,14 +581,21 @@ for (let key of storageKeys) {
 		loadFromLocalStorage(toDo.name).forEach((eventNode) =>
 			appendChild(toDo.container, eventNode)
 		);
+		textContent(toDo.counter, `To Do: ${toDo.container.childElementCount}`);
+		console.log(toDo.container.childElementCount);
 	} else if (key == appointment.name) {
 		loadFromLocalStorage(appointment.name).forEach((eventNode) =>
 			appendChild(appointment.container, eventNode)
+		);
+		textContent(
+			appointment.counter,
+			`Appointments: ${appointment.container.childElementCount}`
 		);
 	} else if (key == other.name) {
 		loadFromLocalStorage(other.name).forEach((eventNode) =>
 			appendChild(other.container, eventNode)
 		);
+		textContent(other.counter, `Other: ${other.container.childElementCount}`);
 	} else if (key == note.name) {
 		loadFromLocalStorage(note.name).forEach((eventNode) =>
 			appendChild(note.container, eventNode)
@@ -600,5 +604,6 @@ for (let key of storageKeys) {
 		loadFromLocalStorage('completedItems').forEach((eventNode) =>
 			appendChild(completedItemsContainer, eventNode)
 		);
+		textContent(note.counter, `Note: ${note.container.childElementCount}`);
 	}
 }
