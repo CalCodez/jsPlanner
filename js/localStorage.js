@@ -79,3 +79,69 @@ const appendEvent = (obj, data, button1, button2) => {
 	completeEvent(button1, obj.container, data, obj);
 	deleteEvent(button2.obj.container, data, obj);
 };
+
+completeButton.addEventListener(click, function () {
+	if (
+		completeButton.parentElement.parentElement.parentElement == toDo.container
+	) {
+		completeEvent(completeButton, toDoEventCounter, event, toDo, toDo.name);
+	} else if (
+		completeButton.parentElement.parentElement.parentElement ==
+		appointment.container
+	) {
+		completeEvent(
+			completeButton,
+			appointmentEventCounter,
+			event,
+			appointment,
+			appointment.name
+		);
+	} else if (
+		completeButton.parentElement.parentElement.parentElement == other.container
+	) {
+		completeEvent(
+			completeButton,
+			otherEventCounter,
+			eventData,
+			other,
+			other.name
+		);
+	} else if (
+		completeButton.parentElement.parentElement.parentElement == note.container
+	) {
+		completeEvent(completeButton, noteEventCounter, event, note, note.name);
+	}
+});
+
+deleteButton.addEventListener(click, function () {
+	if (
+		deleteButton.parentElement.parentElement.parentElement == toDo.container
+	) {
+		deleteEvent(deleteButton, toDoEventCounter, event, toDo, toDo.name);
+	} else if (
+		deleteButton.parentElement.parentElement.parentElement ==
+		appointment.container
+	) {
+		deleteEvent(
+			deleteButton,
+			appointmentEventCounter,
+			event,
+			appointment,
+			appointment.name
+		);
+	} else if (
+		deleteButton.parentElement.parentElement.parentElement == other.container
+	) {
+		deleteEvent(deleteButton, otherEventCounter, event, other, other.name);
+	} else if (
+		deleteButton.parentElement.parentElement.parentElement == note.container
+	) {
+		deleteEvent(deleteButton, noteEventCounter, event, note, note.name);
+	} else if (
+		deleteButton.parentElement.parentElement.parentElement ==
+		completedItemsContainer
+	) {
+		deleteButton.parentElement.parentElement.remove();
+		removeFromLocalStorage('completedItems', 0);
+	}
+});

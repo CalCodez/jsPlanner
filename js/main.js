@@ -363,36 +363,8 @@ const appendEvent = (obj, container, data, button1, button2) => {
 	obj.eventCounter.push(data);
 	textContent(obj.counter, `${obj.name}: ${obj.eventCounter.length}`);
 	saveToLocalStorage(obj.name, obj.eventCounter);
-	button1.addEventListener(click, function () {
-		button1.parentElement.parentElement.remove();
-		appendChild(completedItemsContainer, button1.parentElement.parentElement);
-		obj.eventCounter.pop(data);
-		textContent(obj.counter, `${obj.name}: ${obj.counter.length}`);
-		textContent(totalEventCount, `Total: ${totalEventCount()}`);
-		completedParent.push(data);
-		removeFromLocalStorage(obj.name, 0);
-		saveToLocalStorage('completedItems', completedParent);
-	});
-
-	button2.addEventListener(click, function () {
-		button2.parentElement.parentElement.remove();
-		obj.eventCounter.pop(data);
-		textContent(obj.counter, `${obj.name}: ${obj.counter.length}`);
-		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-		removeFromLocalStorage(obj.name, 0);
-		removeFromLocalStorage('completedItems', 0);
-	});
-};
-
-const deleteEvent = (toggler, parent, item, obj) => {
-	toggler.addEventListener(click, function () {
-		toggler.parentElement.parentElement.remove();
-		parent.pop(item);
-		textContent(obj.counter, `${obj.name}: ${parent.length}`);
-		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
-		removeFromLocalStorage(obj.name, 0);
-		removeFromLocalStorage('completedItems', 0);
-	});
+	completeEvent(button1, obj.eventCounter, data, obj);
+	deleteEvent(button2, obj.eventCounter, data, obj);
 };
 
 const completeEvent = (toggler, parent, item, obj) => {
@@ -405,6 +377,17 @@ const completeEvent = (toggler, parent, item, obj) => {
 		completedParent.push(item);
 		removeFromLocalStorage(obj.name, 0);
 		saveToLocalStorage('completedItems', completedParent);
+	});
+};
+
+const deleteEvent = (toggler, parent, item, obj) => {
+	toggler.addEventListener(click, function () {
+		toggler.parentElement.parentElement.remove();
+		parent.pop(item);
+		textContent(obj.counter, `${obj.name}: ${parent.length}`);
+		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
+		removeFromLocalStorage(obj.name, 0);
+		removeFromLocalStorage('completedItems', 0);
 	});
 };
 
@@ -440,31 +423,32 @@ const generateEvent = {
 //Generate An Event Function
 const eventGeneratorButton = getById('generate-event-btn');
 
+const buildEventBox = (array, obj) => {
+	addClass(array[0], obj.eventBox);
+	addClass(array[1], obj.type.containerClass);
+	addClass(array[2], obj.title.containerClass);
+	addClass(array[3], obj.date.containerClass);
+	addClass(array[4], obj.description.containerClass);
+	addClass(array[5], obj.button.containerClass);
+	addClass(array[6], obj.timeStamp.containerClass);
+	textContent(array[1], obj.type.formInput.value);
+	textContent(array[2], obj.title.formInput.value);
+	textContent(array[3], obj.date.formInput.value);
+	textContent(array[4], obj.description.formInput.value);
+	textContent(array[6], generateTimeStampString());
+};
+
 eventGeneratorButton.addEventListener(click, function () {
 	let eventContainers = [];
 	for (let i = 0; i < 7; i++) {
 		eventContainers.push(createElement('div'));
 	}
-	const [event, type, title, date, description, button, timeStamp] =
-		eventContainers;
-
-	addClass(event, generateEvent.eventBox);
-	addClass(type, generateEvent.type.containerClass);
-	addClass(title, generateEvent.title.containerClass);
-	addClass(date, generateEvent.date.containerClass);
-	addClass(description, generateEvent.description.containerClass);
-	addClass(button, generateEvent.button.containerClass);
-	addClass(timeStamp, generateEvent.timeStamp.containerClass);
-	textContent(type, generateEvent.type.formInput.value);
-	textContent(title, generateEvent.title.formInput.value);
-	textContent(date, generateEvent.date.formInput.value);
-	textContent(description, generateEvent.description.formInput.value);
-	textContent(timeStamp, generateTimeStampString());
+	buildEventBox(eventContainers, generateEvent);
 
 	const [eventBox, ...rest] = eventContainers;
 	addClass(eventBox, 'container');
 	for (let i of rest) {
-		appendChild(event, i);
+		appendChild(eventBox, i);
 	}
 	let eventBoxButtons = [];
 	for (let i = 0; i < 2; i++) {
@@ -474,26 +458,20 @@ eventGeneratorButton.addEventListener(click, function () {
 		addClass(toggles, generateEvent.button.buttonClass);
 		appendChild(rest[4], toggles);
 	}
-
 	const [completeButton, deleteButton] = eventBoxButtons;
 	textContent(completeButton, generateEvent.button.completeText);
 	textContent(deleteButton, generateEvent.button.deleteText);
-
-	const clonedEvent = event.cloneNode(true);
+	const clonedEvent = eventBox.cloneNode(true);
 	const eventData = extractEventData(clonedEvent);
-
-	//NOTE:CODE: Refactor this if statement to an arrow function using this obj.value to reduce this code
-
 	if (generateEvent.type.formInput.value == 'To Do') {
-		appendEvent(toDo, event, eventData, completeButton, deleteButton);
+		appendEvent(toDo, eventBox, eventData, completeButton, deleteButton);
 	} else if (generateEvent.type.formInput.value == 'Appointment') {
-		appendEvent(appointment, event, eventData, completeButton, deleteButton);
+		appendEvent(appointment, eventBox, eventData, completeButton, deleteButton);
 	} else if (generateEvent.type.formInput.value == 'Other') {
-		appendEvent(other, event, eventData, completeButton, deleteButton);
+		appendEvent(other, eventBox, eventData, completeButton, deleteButton);
 	} else if (generateEvent.type.formInput.value == 'Note') {
-		appendEvent(note, event, eventData, completeButton, deleteButton);
+		appendEvent(note, eventBox, eventData, completeButton, deleteButton);
 	}
-
 	textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 	toggleClass(eventFormContainer, flexActive);
 });
@@ -593,8 +571,7 @@ toggleEventHolders(appointmentHolder, todoHolder, otherHolder, noteHolder);
 toggleEventHolders(otherHolder, todoHolder, appointmentHolder, noteHolder);
 toggleEventHolders(noteHolder, todoHolder, appointmentHolder, otherHolder);
 
-console.log(loadFromLocalStorage('appointments', appointmentEventCounter));
-
+//Load and append from local storage vars and function
 const storageKeys = [
 	toDo.name,
 	appointment.name,
@@ -602,9 +579,6 @@ const storageKeys = [
 	note.name,
 	'completedItems',
 ];
-
-//const loadEvents = loadFromLocalStorage(array);
-
 for (let key of storageKeys) {
 	if (key == toDo.name) {
 		loadFromLocalStorage(toDo.name).forEach((eventNode) =>
