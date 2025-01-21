@@ -1,0 +1,33 @@
+@media (max-width: 768px) {
+	.main-toggle-container {
+		display: none;
+	}
+
+	#mobile-menu-toggler {
+		visibility: visible;
+	}
+
+	.status-bar .container:first-child {
+		display: none;
+	}
+	.status-bar .container:last-child {
+		width: 200px;
+		font-size: 0.8rem;
+	}
+
+	.main-body-container {
+		height: fit-content;
+	}
+
+	.main-display-container {
+		height: fit-content;
+		row-gap: 30px;
+		margin-top: 10px;
+		padding: 10px 0;
+	}
+
+	.main-display-container .event-holder-container {
+		height: 300px;
+		width: 350px;
+	}
+}

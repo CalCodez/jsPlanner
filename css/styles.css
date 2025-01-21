@@ -116,10 +116,11 @@
 	height: 40px;
 	top: 0;
 	color: var(--red-dark);
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	font-family: 'Stereotones', sans-serif;
 	border-bottom: 3px inset var(--red-dark);
 	position: absolute;
+	text-shadow: 1px 1px 1px var(--black-light);
 }
 
 .event-holder-container .event-parent-container {
