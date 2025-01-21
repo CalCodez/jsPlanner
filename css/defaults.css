@@ -3,8 +3,8 @@
 	--white: #fff;
 	--black-main: #3b3b3b;
 	--black-dark: #222222;
+	--status-bar: #0f0f0f;
 	--black-light: #636363;
-	--status-bar: #181616;
 	--red-main: #c30101;
 	--red-dark: #940000;
 
@@ -38,6 +38,7 @@ body {
 	align-items: center;
 	height: 100%;
 	justify-content: center;
+	background-color: var(--black);
 }
 
 body {
@@ -45,7 +46,6 @@ body {
 	max-width: 1500px;
 	justify-self: center;
 	flex-direction: column;
-	background-color: var(--black-dark);
 	box-shadow: 1px 1px 5px var(--black-light);
 	position: relative;
 }
@@ -225,7 +225,7 @@ label {
 	padding: 10px;
 	justify-content: space-between;
 	overflow: hidden;
-	transition: height ease 0.5s;
+	transition: height ease 0.1s;
 }
 
 .view-event {

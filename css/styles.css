@@ -22,6 +22,10 @@
 	height: 30%;
 	justify-content: space-evenly;
 	background-color: var(--status-bar);
+	background-color: var(--black-darker);
+	box-shadow: 1px -1px 3px 1px var(--red-dark);
+	border: 1px 1px outset var(--black);
+	border-radius: 8px;
 }
 
 .status-bar .container {

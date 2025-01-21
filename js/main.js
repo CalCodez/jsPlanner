@@ -133,7 +133,7 @@ const parentEventCounter = {
 		eventCounter: Array.from(getById('toDo-parent-container')),
 	},
 	appointment: {
-		name: 'Appointments',
+		name: 'App',
 		container: getById('appointment-parent-container'),
 		counter: getById('appointment-count'),
 		eventCounter: Array.from(getById('appointment-parent-container')),
@@ -154,14 +154,6 @@ const parentEventCounter = {
 	},
 };
 const { toDo, appointment, other, note } = parentEventCounter;
-
-const totalCounts =
-	toDo.container.childElementCount +
-	appointment.container.childElementCount +
-	other.container.childElementCount +
-	note.container.childElementCount;
-
-console.log(totalCounts);
 
 const saveToLocalStorage = (key, array) => {
 	localStorage.setItem(key, JSON.stringify(array));
@@ -351,15 +343,6 @@ function removeFromLocalStorage(key, position) {
 	} else {
 		console.error('No data found for the key:', key);
 	}
-}
-
-function totalEventCount() {
-	return (
-		toDo.eventCounter.length +
-		appointment.eventCounter.length +
-		other.eventCounter.length +
-		note.eventCounter.length
-	);
 }
 
 const buildEventBox = (array, obj) => {
@@ -632,7 +615,7 @@ for (let key of storageKeys) {
 		);
 		textContent(
 			appointment.counter,
-			`Appointments: ${appointment.container.childElementCount}`
+			`App: ${appointment.container.childElementCount}`
 		);
 	} else if (key == other.name) {
 		loadFromLocalStorage(other.name).forEach((eventNode) =>
