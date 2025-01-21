@@ -26,12 +26,11 @@
 <!--3. Remove all note form buttons and functions-->
 <!----create a mobile menu for responsive-->
 <!----delete all notebox classes and fucntion(conveted noted in to generateEvnts)-->
+<!--updae counters on local storage function()-->
+<!--work mobile responsive-->
+<!----mobile-menu styles (container and buttons)-->
+<!----js refractor clear up CODE: placements in the js files-->
 
---(reworkd and add animations)style/theme needs attention
---work mobile responsive
---mobile-menu styles (container and buttons)
-
+--Animations
+--Theme Revamp
 --css clean up
---js refractor clear up CODE: placements in the js files
-
-<!--**updae counters on local storage function()-->
