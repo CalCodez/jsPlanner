@@ -232,6 +232,8 @@ const loadFromLocalStorage = (key) => {
 		textContent(deleteButton, generateEvent.button.deleteText);
 		appendChild(eventNode, buttonContainer);
 
+		viewEvent(typeDiv, eventNode);
+
 		completeButton.addEventListener(click, function () {
 			if (
 				completeButton.parentElement.parentElement.parentElement ==
@@ -397,6 +399,16 @@ const deleteEvent = (toggler, parent, item, obj) => {
 	});
 };
 
+const viewEvent = (toggler, container) => {
+	toggler.addEventListener(click, function () {
+		if (!container.classList.contains('view-event')) {
+			toggleClass(container, 'view-event');
+		} else {
+			toggleClass(container, 'view-event');
+		}
+	});
+};
+
 const appendEvent = (obj, container, data, button1, button2) => {
 	appendChild(obj.container, container);
 	obj.eventCounter.push(data);
@@ -444,6 +456,7 @@ eventGeneratorButton.addEventListener(click, function () {
 		eventContainers.push(createElement('div'));
 	}
 	buildEventBox(eventContainers, generateEvent);
+	viewEvent(eventContainers[1], eventContainers[0]);
 
 	const [eventBox, ...rest] = eventContainers;
 	addClass(eventBox, 'container');
@@ -466,13 +479,41 @@ eventGeneratorButton.addEventListener(click, function () {
 	const eventData = extractEventData(clonedEvent);
 
 	if (generateEvent.type.formInput.value == 'To Do') {
-		appendEvent(toDo, eventBox, eventData, completeButton, deleteButton);
+		appendEvent(
+			toDo,
+			eventBox,
+			eventData,
+			completeButton,
+			deleteButton,
+			eventContainers
+		);
 	} else if (generateEvent.type.formInput.value == 'Appointment') {
-		appendEvent(appointment, eventBox, eventData, completeButton, deleteButton);
+		appendEvent(
+			appointment,
+			eventBox,
+			eventData,
+			completeButton,
+			deleteButton,
+			eventContainers
+		);
 	} else if (generateEvent.type.formInput.value == 'Other') {
-		appendEvent(other, eventBox, eventData, completeButton, deleteButton);
+		appendEvent(
+			other,
+			eventBox,
+			eventData,
+			completeButton,
+			deleteButton,
+			eventContainers
+		);
 	} else if (generateEvent.type.formInput.value == 'Note') {
-		appendEvent(note, eventBox, eventData, completeButton, deleteButton);
+		appendEvent(
+			note,
+			eventBox,
+			eventData,
+			completeButton,
+			deleteButton,
+			eventContainers
+		);
 	}
 	toggleClass(eventFormContainer, flexActive);
 });
