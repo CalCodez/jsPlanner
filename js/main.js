@@ -124,7 +124,6 @@ toggleCreateEvent(eventFormTogglers);
 
 //``Collect Each event holder parent container Ids and sote in Array.from
 const completedParent = Array.from(getById('completed-items-container'));
-const totalEventCounter = getById('total-event-count');
 
 const parentEventCounter = {
 	toDo: {
@@ -155,6 +154,14 @@ const parentEventCounter = {
 	},
 };
 const { toDo, appointment, other, note } = parentEventCounter;
+
+const totalCounts =
+	toDo.container.childElementCount +
+	appointment.container.childElementCount +
+	other.container.childElementCount +
+	note.container.childElementCount;
+
+console.log(totalCounts);
 
 const saveToLocalStorage = (key, array) => {
 	localStorage.setItem(key, JSON.stringify(array));
@@ -374,7 +381,6 @@ const completeEvent = (toggler, parent, item, obj) => {
 		appendChild(completedItemsContainer, toggler.parentElement.parentElement);
 		parent.pop(item);
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
-		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 		completedParent.push(item);
 		removeFromLocalStorage(obj.name, 0);
 		saveToLocalStorage('completedItems', completedParent);
@@ -386,7 +392,6 @@ const deleteEvent = (toggler, parent, item, obj) => {
 		toggler.parentElement.parentElement.remove();
 		parent.pop(item);
 		textContent(obj.counter, `${obj.name}: ${parent.length}`);
-		textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 		removeFromLocalStorage(obj.name, 0);
 		removeFromLocalStorage('completedItems', 0);
 	});
@@ -395,10 +400,10 @@ const deleteEvent = (toggler, parent, item, obj) => {
 const appendEvent = (obj, container, data, button1, button2) => {
 	appendChild(obj.container, container);
 	obj.eventCounter.push(data);
-	textContent(obj.counter, `${obj.name}: ${obj.eventCounter.length}`);
 	saveToLocalStorage(obj.name, obj.eventCounter);
 	completeEvent(button1, obj.eventCounter, data, obj);
 	deleteEvent(button2, obj.eventCounter, data, obj);
+	textContent(obj.counter, `${obj.name}: ${obj.container.childElementCount}`);
 };
 
 const generateEvent = {
@@ -469,7 +474,6 @@ eventGeneratorButton.addEventListener(click, function () {
 	} else if (generateEvent.type.formInput.value == 'Note') {
 		appendEvent(note, eventBox, eventData, completeButton, deleteButton);
 	}
-	textContent(totalEventCounter, `Total: ${totalEventCount()}`);
 	toggleClass(eventFormContainer, flexActive);
 });
 
@@ -598,10 +602,10 @@ for (let key of storageKeys) {
 		loadFromLocalStorage(note.name).forEach((eventNode) =>
 			appendChild(note.container, eventNode)
 		);
+		textContent(note.counter, `Note: ${note.container.childElementCount}`);
 	} else if (key == 'completedItems') {
 		loadFromLocalStorage('completedItems').forEach((eventNode) =>
 			appendChild(completedItemsContainer, eventNode)
 		);
-		textContent(note.counter, `Note: ${note.container.childElementCount}`);
 	}
 }
