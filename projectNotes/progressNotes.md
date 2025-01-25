@@ -31,6 +31,6 @@
 <!----mobile-menu styles (container and buttons)-->
 <!----js refractor clear up CODE: placements in the js files-->
 <!----Animations-->
+<!----css clean up-->
 
---Theme Revamp
---css clean up
+<!-- ** project complete 01/25/2025 -->
