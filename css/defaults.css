@@ -124,9 +124,11 @@ body {
 	height: 100%;
 	outline: 1px solid red;
 	background-color: var(--black);
-	opacity: 0.2;
 	z-index: 2;
 	display: none;
+	border-radius: 10px;
+	padding: 30px;
+	/*transition: all ease-in-out 1s;*/
 }
 
 .event-form {
@@ -139,7 +141,6 @@ body {
 	justify-content: center;
 	padding: 10px;
 	box-shadow: 2px 2px 15px 2px var(--red-dark);
-	opacity: 1;
 	row-gap: 20px;
 	border-radius: 20px;
 	display: flex;
@@ -159,8 +160,7 @@ body {
 }
 .event-form select,
 .event-form input,
-.event-form textarea,
-.note-form textarea {
+.event-form textarea {
 	width: 280px;
 	height: 30px;
 	border: 2px groove var(--black-light);
@@ -168,13 +168,6 @@ body {
 	color: var(--red-dark);
 	border-radius: 8px;
 	padding: 5px;
-}
-
-.note-form textarea {
-	height: 300px;
-	resize: none;
-	font-size: 1.5rem;
-	border: 2px groove var(--red-dark);
 }
 
 .event-form .event-form-description-input {
@@ -232,6 +225,7 @@ label {
 	height: 380px;
 	transition: height ease 0.5s;
 	margin-bottom: 20px;
+	transition: height ease-in 0.1s;
 }
 .event-type-container {
 	width: 50%;
