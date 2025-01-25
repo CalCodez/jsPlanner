@@ -30,7 +30,7 @@
 <!--work mobile responsive-->
 <!----mobile-menu styles (container and buttons)-->
 <!----js refractor clear up CODE: placements in the js files-->
+<!----Animations-->
 
---Animations
 --Theme Revamp
 --css clean up
